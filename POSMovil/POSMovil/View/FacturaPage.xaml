@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="POSMovil.View.FacturaPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="30" Spacing="20">
+                <StackLayout>
+                    <Label  Text="CI o Nit" Padding="2" />
+                    <Entry x:Name="BoxNit" IsTextPredictionEnabled="False" TextTransform="Uppercase" Text="0" MaxLength="13" Keyboard="Numeric"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label  Text="Nombre o Razón social" Padding="2" />
+                    <Entry x:Name="BoxNombre" IsTextPredictionEnabled="False" TextTransform="Uppercase" Text="SIN NOMBRE" MaxLength="80"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label  Text="Detalle o Concepto" Padding="2" />
+                    <Editor x:Name="BoxDetalle" IsTextPredictionEnabled="False" TextTransform="Uppercase" MaxLength="150" AutoSize="TextChanges"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label  Text="Total (Bs.)" Padding="2" />
+                    <Entry x:Name="BoxTotal" IsTextPredictionEnabled="False" TextTransform="Uppercase" Keyboard="Telephone" MaxLength="7"/>
+                </StackLayout>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="cbOriginal" IsChecked="True" IsEnabled="False"/>
+                        <Label Text="Original Cliente" Margin="8"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="cbCopiaConta"/>
+                        <Label Text="Copia Contabilidad" Margin="8"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="cbCopiaAdmin"/>
+                        <Label Text="Copia Administrativa" Margin="8"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout>
+                    <Label x:Name="lblCargando" HorizontalOptions="CenterAndExpand"/>
+                    <ActivityIndicator x:Name="Cargador" IsRunning="False" IsVisible="false" />
+                </StackLayout>
+                <Button Text="Generar Factura" x:Name="BtnFacturar"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

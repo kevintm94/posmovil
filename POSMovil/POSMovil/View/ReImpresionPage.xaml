@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="POSMovil.View.ReImpresionPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="20" Margin="10">
+                <Label Text="FACTURA" HorizontalOptions="CenterAndExpand"/>
+                <StackLayout Padding="0,0,0,30" Orientation="Horizontal">
+                    <StackLayout>
+                        <Label Text="NRO:"/>
+                        <Label Text="NIT:"/>
+                        <Label Text="NOMBRE:"/>
+                        <Label Text="TOTAL:"/>
+                    </StackLayout>
+                    <StackLayout>
+                        <Label x:Name="lblNro"/>
+                        <Label x:Name="lblNit"/>
+                        <Label x:Name="lblNombre"/>
+                        <Label x:Name="lblTotal"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Label Text="SELECCIONE LAS COPIAS A REIMPRIMIR" 
+                HorizontalOptions="CenterAndExpand" Padding="0,0,0,10" />
+                <StackLayout Orientation="Horizontal" Padding="0,0,0,0">
+                    <CheckBox x:Name="cbOriginal"/>
+                    <Label Text="Original Cliente" Margin="8"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="0,0,0,0">
+                    <CheckBox x:Name="cbCopiaConta"/>
+                    <Label Text="Copia Contabilidad" Margin="8"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Padding="0,0,0,0">
+                    <CheckBox x:Name="cbCopiaAdmin"/>
+                    <Label Text="Copia Administrativa" Margin="8"/>
+                </StackLayout>
+                <Button Text="IMPRIMIR COPIAS" x:Name="BtnReImp"/>
+                <StackLayout>
+                    <Label x:Name="lblCargando" HorizontalOptions="CenterAndExpand"/>
+                    <ActivityIndicator x:Name="Cargador" IsRunning="False" IsVisible="true" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

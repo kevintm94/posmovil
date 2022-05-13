@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="POSMovil.View.HomePage"
+             Title="PC-POS Móvil">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="logout.png" Priority="0" Order="Primary" x:Name="BtnLogOut" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout Padding="20">
+                    <Label Text="¡Bienvenido!" HorizontalOptions="Center" FontSize="30"/>
+                </StackLayout>
+                <StackLayout Padding="20">
+                    <Button Text="Emitir factura de limpieza" x:Name="BtnLimpieza" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="#ffdd33"/>
+                    <Button Text="Reimprimir factura de limpieza" x:Name="BtnRILimpieza" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="#ffdd33"/>
+                </StackLayout>
+                <StackLayout Padding="20">
+                    <Button Text="Emitir factura de mudanza" x:Name="BtnMudanza" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="#33ffe0"/>
+                    <Button Text="Reimprimir factura de mudanza" x:Name="BtnRIMudanza" VerticalOptions="CenterAndExpand" FontSize="20" BackgroundColor="#33ffe0"/>
+                </StackLayout>
+                <!--StackLayout Padding="20">
+                <Button Text="Conectar Impresora" x:Name="BtnScan" VerticalOptions="CenterAndExpand" FontSize="20"/>
+            </-->
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

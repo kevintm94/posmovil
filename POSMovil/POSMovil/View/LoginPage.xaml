@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="POSMovil.LoginPage"
+             Title="Inicio de Sesión">
+    <ContentPage.Content>
+        <StackLayout Spacing="10" Padding="5" Orientation="Vertical" x:Name="outerStack">
+            <ScrollView>
+                <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Label Text="PC-POS Móvil" HorizontalOptions="Center" FontSize="30"/>
+                    <Image Source="avatar.png" WidthRequest="200" HeightRequest="200" />
+                    <StackLayout>
+                        <Label Text="USUARIO" Padding="2"/>
+                        <Entry x:Name="BoxUser" TextTransform="Uppercase" MaxLength="5" IsTextPredictionEnabled="false" />
+                    </StackLayout>
+                    <StackLayout>
+                        <Label Text="CONTRASEÑA" Padding="2" />
+                        <Entry x:Name="BoxPassword" IsPassword="True" TextTransform="Uppercase" MaxLength="5" />
+                    </StackLayout>
+                    <Grid>
+                        <ActivityIndicator x:Name="Cargador" IsRunning="false" IsVisible="true" />
+                    </Grid>
+                    <Button Text="INICIAR SESIÓN" x:Name="BtnLogin" HorizontalOptions="Center"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

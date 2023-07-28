@@ -52,10 +52,10 @@ namespace POSMovil
                 var userindb = await new UserRequest(App.RestClient).Get(usuario.Id);
                 if (userindb != null)
                 {
-                    foreach (var item in userindb)
+                    /*foreach (var item in userindb)
                     {
                         await DisplayAlert("PC-POS Móvil", item.nombre, "Aceptar");
-                    }
+                    }*/
                 }
                 else 
                 {
@@ -106,7 +106,7 @@ namespace POSMovil
             var userindb = await new UserRequest(App.RestClient).Get(user.Id);
             if (userindb != null)
             {
-                var firstUser = userindb.ElementAt(0);
+                var firstUser = userindb;
                 user = User.FromUsuario(firstUser);
                 await Navigation.PushAsync(new AddUserPage(TypeAction.Update, user.Id, user), true);
             }

@@ -1,0 +1,21 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a5b7fa8e-e380-4fca-9179-b02cbb657704": {
+      "ProjectGuid": "a5b7fa8e-e380-4fca-9179-b02cbb657704",
+      "DisplayName": "POSMovil",
+      "ColorIndex": 0
+    },
+    "0b9c85a7-b453-4545-a532-94db1fb2caeb": {
+      "ProjectGuid": "0b9c85a7-b453-4545-a532-94db1fb2caeb",
+      "DisplayName": "POSMovil.Android",
+      "ColorIndex": 1
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Archivos varios",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 2
+}

@@ -230,6 +230,11 @@ namespace POSMovil.API
                 };
                 return httpresponse;
             }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Created)
+            {
+                var telement = JsonConvert.DeserializeObject<T>(jsonresult);
+                httpresponse.Result = telement;
+            }
             else
             {
                 var status = JsonConvert.DeserializeObject<StatusResponse>(jsonresult);

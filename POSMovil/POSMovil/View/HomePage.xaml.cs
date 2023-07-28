@@ -15,7 +15,6 @@ namespace POSMovil.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
-        private Parametros _parametro;
         public HomePage()
         {
             InitializeComponent();
@@ -32,6 +31,7 @@ namespace POSMovil.View
             BtnMudanza.Clicked += BtnMudanza_Clicked;
             BtnRILimpieza.Clicked += BtnRILimpieza_Clicked;
             BtnRIMudanza.Clicked += BtnRIMudanza_Clicked;
+            //BtnTest.Clicked += BtnTest_Clicked; 
             //BtnScan.Clicked += BtnScan_Clicked;
             //BtnScan.IsEnabled = false;
             //BtnScan.IsVisible = false;
@@ -45,15 +45,15 @@ namespace POSMovil.View
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para re imprimir una factura", "Aceptar");
                 return;
             }
-            var fact = await new FacturaRequest(App.RestClient).GetRI((String)App.Current.Properties["user"], _parametro.nro_auto2);
+            var fact = await new FacturaRequest(App.RestClient).GetRI((String)App.Current.Properties["user"], 456);
             if (fact != null)
             {
                 Factura fact1 = fact.ElementAt(0);
-                var factdet = await new FacturaDetalleRequest(App.RestClient).GetRI(fact1.nrofact, _parametro.nro_auto2);
+                var factdet = await new FacturaDetalleRequest(App.RestClient).GetRI(fact1.nrofact, 456);
                 if (factdet != null)
                 {
                     FacturaDetalle factdet1 = factdet.ElementAt(0);
-                    await Navigation.PushAsync(new ReImpresionPage(_parametro, 2, fact1, factdet1) { Title = "Re Imprimir Factura de Mudanza" }, true);
+                    await Navigation.PushAsync(new ReImpresionPage(new Parametros(), 2, fact1, factdet1) { Title = "Re Imprimir Factura de Mudanza" }, true);
                 }
                 else
                 {
@@ -75,15 +75,15 @@ namespace POSMovil.View
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para re imprimir una factura", "Aceptar");
                 return;
             }
-            var fact = await new FacturaRequest(App.RestClient).GetRI((String)App.Current.Properties["user"], _parametro.nro_auto1);
+            var fact = await new FacturaRequest(App.RestClient).GetRI((String)App.Current.Properties["user"], 123);
             if (fact != null)
             {
                 Factura fact1 = fact.ElementAt(0);
-                var factdet = await new FacturaDetalleRequest(App.RestClient).GetRI(fact1.nrofact, _parametro.nro_auto1);
+                var factdet = await new FacturaDetalleRequest(App.RestClient).GetRI(fact1.nrofact, 123);
                 if (factdet != null)
                 {
                     FacturaDetalle factdet1 = factdet.ElementAt(0);
-                    await Navigation.PushAsync(new ReImpresionPage(_parametro, 1, fact1, factdet1) { Title = "Re Imprimir Factura de Limpieza" }, true);
+                    await Navigation.PushAsync(new ReImpresionPage(new Parametros(), 1, fact1, factdet1) { Title = "Re Imprimir Factura de Limpieza" }, true);
                 }
                 else
                 {
@@ -100,15 +100,13 @@ namespace POSMovil.View
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            if (Connectivity.NetworkAccess != NetworkAccess.Internet)
+            /*if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para usar la aplicación", "Aceptar");
                 App.Current.Logout();
                 return;
-            }
-            var userindb = await new UserRequest(App.RestClient).Get((String)App.Current.Properties["user"]);
-            var firstUser = userindb.ElementAt(0);
-            User user = User.FromUsuario(firstUser);
+            }*/
+            var user = await new UserRequest(App.RestClient).Get((String)App.Current.Properties["user"]);
             if (user.Cmd_99_Acc == 1)
             {
                 App.Current.Properties["limpieza"] = false;
@@ -141,8 +139,6 @@ namespace POSMovil.View
                 App.Current.Logout();
                 return;
             }
-            List<Parametros> parametros = await new ParametrosResponse(App.RestClient).Get();
-            _parametro = parametros.ElementAt(0);
         }
 
         private async void BtnMudanza_Clicked(object sender, EventArgs e)
@@ -152,7 +148,9 @@ namespace POSMovil.View
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para facturar", "Aceptar");
                 return;
             }
-            await Navigation.PushAsync(new FacturaPage(_parametro, _parametro.nro_auto2, 2) { Title = "Factura de Mudanza" }, true);
+            Siat siat = await new SiatRequest(App.RestClient).Find(0, 2, "CV");
+            Parametros parametros = await new ParametrosResponse(App.RestClient).Get(1);
+            await Navigation.PushAsync(new FacturaPage(parametros, 324110, siat) { Title = "Factura de Mudanza" }, true);
         }
 
         private async void BtnLimpieza_Clicked(object sender, EventArgs e)
@@ -162,7 +160,9 @@ namespace POSMovil.View
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para facturar", "Aceptar");
                 return;
             }
-            await Navigation.PushAsync(new FacturaPage(_parametro, _parametro.nro_auto1, 1) { Title = "Factura de Limpieza" }, true);
+            Siat siat = await new SiatRequest(App.RestClient).Find(0, 1, "CV");
+            Parametros parametros = await new ParametrosResponse(App.RestClient).Get(1);
+            await Navigation.PushAsync(new FacturaPage(parametros, 3241312, siat) { Title = "Factura de Limpieza" }, true);
         }
 
         private void BtnLogOut_Clicked(object sender, EventArgs e)

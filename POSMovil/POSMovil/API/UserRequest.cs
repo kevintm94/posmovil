@@ -25,10 +25,10 @@ namespace POSMovil.API
             return new List<Usuario>();
         }
 
-        public async Task<List<Usuario>> Get(string id)
+        public async Task<Usuario> Get(string id)
         {
 
-            var response = await _restclient.GetAsync<List<Usuario>>($"{App.BaseUrl}/user/get/{id}");
+            var response = await _restclient.GetAsync<Usuario>($"{App.BaseUrl}/user/{id}");
 
             if (response.Result != null) return response.Result;
 

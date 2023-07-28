@@ -5,19 +5,20 @@
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
     <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\.nuget\packages\</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Administrador\.nuget\packages\;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages;C:\Program Files (x86)\Microsoft\Xamarin\NuGet\</NuGetPackageFolders>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Kevin\.nuget\packages\</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
-    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">5.11.1</NuGetToolVersion>
+    <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.0.1</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="C:\Users\Administrador\.nuget\packages\" />
-    <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
-    <SourceRoot Include="C:\Program Files (x86)\Microsoft\Xamarin\NuGet\" />
+    <SourceRoot Include="C:\Users\Kevin\.nuget\packages\" />
   </ItemGroup>
-  <PropertyGroup>
-    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
-  </PropertyGroup>
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Import Project="$(NuGetPackageRoot)xamarin.forms\4.8.0.1687\buildTransitive\Xamarin.Forms.props" Condition="Exists('$(NuGetPackageRoot)xamarin.forms\4.8.0.1687\buildTransitive\Xamarin.Forms.props')" />
+    <Import Project="$(NuGetPackageRoot)nswag.msbuild\13.0.5\build\NSwag.MSBuild.props" Condition="Exists('$(NuGetPackageRoot)nswag.msbuild\13.0.5\build\NSwag.MSBuild.props')" />
+    <Import Project="$(NuGetPackageRoot)microsoft.extensions.apidescription.client\3.0.0\build\Microsoft.Extensions.ApiDescription.Client.props" Condition="Exists('$(NuGetPackageRoot)microsoft.extensions.apidescription.client\3.0.0\build\Microsoft.Extensions.ApiDescription.Client.props')" />
+    <Import Project="$(NuGetPackageRoot)nswag.apidescription.client\13.0.5\build\NSwag.ApiDescription.Client.props" Condition="Exists('$(NuGetPackageRoot)nswag.apidescription.client\13.0.5\build\NSwag.ApiDescription.Client.props')" />
   </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgNSwag_MSBuild Condition=" '$(PkgNSwag_MSBuild)' == '' ">C:\Users\Kevin\.nuget\packages\nswag.msbuild\13.0.5</PkgNSwag_MSBuild>
+  </PropertyGroup>
 </Project>

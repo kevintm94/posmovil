@@ -7,7 +7,7 @@
         <StackLayout Spacing="10" Padding="5" Orientation="Vertical" x:Name="outerStack">
             <ScrollView>
                 <StackLayout Padding="20" Spacing="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Label Text="PC-POS Móvil" HorizontalOptions="Center" FontSize="30"/>
+                    <Label Text="POS Móvil" HorizontalOptions="Center" FontSize="30"/>
                     <Image Source="avatar.png" WidthRequest="200" HeightRequest="200" />
                     <StackLayout>
                         <Label Text="USUARIO" Padding="2"/>
@@ -20,7 +20,7 @@
                     <Grid>
                         <ActivityIndicator x:Name="Cargador" IsRunning="false" IsVisible="true" />
                     </Grid>
-                    <Button Text="INICIAR SESIÓN" x:Name="BtnLogin" HorizontalOptions="Center"/>
+                    <Button Text="INICIAR SESIÓN" x:Name="BtnLogin" HorizontalOptions="Center" BackgroundColor="#236EFF" TextColor="White" CornerRadius="12"/>
                 </StackLayout>
             </ScrollView>
         </StackLayout>

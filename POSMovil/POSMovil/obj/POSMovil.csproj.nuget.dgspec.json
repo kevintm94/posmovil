@@ -1,27 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\_Padrino\\POSMovil\\POSMovil\\POSMovil\\POSMovil.csproj": {}
+    "H:\\Padrino\\Projects\\Nexxo\\posmovil - factonline\\POSMovil\\POSMovil\\POSMovil.csproj": {}
   },
   "projects": {
-    "D:\\_Padrino\\POSMovil\\POSMovil\\POSMovil\\POSMovil.csproj": {
+    "H:\\Padrino\\Projects\\Nexxo\\posmovil - factonline\\POSMovil\\POSMovil\\POSMovil.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\_Padrino\\POSMovil\\POSMovil\\POSMovil\\POSMovil.csproj",
+        "projectUniqueName": "H:\\Padrino\\Projects\\Nexxo\\posmovil - factonline\\POSMovil\\POSMovil\\POSMovil.csproj",
         "projectName": "POSMovil",
-        "projectPath": "D:\\_Padrino\\POSMovil\\POSMovil\\POSMovil\\POSMovil.csproj",
-        "packagesPath": "C:\\Users\\Administrador\\.nuget\\packages\\",
-        "outputPath": "D:\\_Padrino\\POSMovil\\POSMovil\\POSMovil\\obj\\",
+        "projectPath": "H:\\Padrino\\Projects\\Nexxo\\posmovil - factonline\\POSMovil\\POSMovil\\POSMovil.csproj",
+        "packagesPath": "C:\\Users\\Kevin\\.nuget\\packages\\",
+        "outputPath": "H:\\Padrino\\Projects\\Nexxo\\posmovil - factonline\\POSMovil\\POSMovil\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Administrador\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Kevin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
@@ -50,15 +44,27 @@
               "target": "Package",
               "version": "[1.2.0, )"
             },
+            "Microsoft.Extensions.ApiDescription.Client": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
             },
+            "NSwag.ApiDescription.Client": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[13.0.5, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
-              "version": "[12.0.3, )"
+              "version": "[13.0.1, )"
             },
             "RestSharp": {
               "target": "Package",
@@ -91,7 +97,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

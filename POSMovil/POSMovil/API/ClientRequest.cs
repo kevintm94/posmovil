@@ -17,17 +17,17 @@ namespace POSMovil.API
 
         public async Task<List<Cliente>> All() 
         {
-            var response = await _restclient.GetAsync<List<Cliente>>($"{App.BaseUrl}/client/all");
+            var response = await _restclient.GetAsync<List<Cliente>>($"{App.BaseUrl}/cliente");
 
             if (response.Result != null) return response.Result;
 
             return new List<Cliente>();
         }
 
-        public async Task<List<Cliente>> Get(long id)
+        public async Task<Cliente> Get(long id)
         {
 
-            var response = await _restclient.GetAsync<List<Cliente>>($"{App.BaseUrl}/client/get/{id}");
+            var response = await _restclient.GetAsync<Cliente>($"{App.BaseUrl}/cliente/{id}");
 
             if (response.Result != null) return response.Result;
 
@@ -36,10 +36,17 @@ namespace POSMovil.API
 
         public async Task<bool> Add(Cliente cliente)
         {
-            var response = await _restclient.ExecuteAsync<Cliente>(Method.POST, $"{App.BaseUrl}/client/add", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<Cliente>(Method.POST, $"{App.BaseUrl}/cliente", new Dictionary<string, object>
             {
                 { "nit", cliente.nit },
-                { "Nombre", cliente.Nombre }
+                { "complement", cliente.complement },
+                { "cdtipodoc", cliente.cdtipodoc },
+                { "Nombre", cliente.Nombre },
+                { "direccion", cliente.direccion },
+                { "telefonos", cliente.telefonos },
+                { "celular_wa", cliente.celular_wa },
+                { "email", cliente.email }
+
             });
 
             return response.Result != null;
@@ -47,9 +54,15 @@ namespace POSMovil.API
 
         public async Task<bool> Update(Cliente cliente, long id)
         {
-            var response = await _restclient.ExecuteAsync<Cliente>(Method.POST, $"{App.BaseUrl}/client/update/{id}", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<Cliente>(Method.PUT, $"{App.BaseUrl}/cliente/{id}", new Dictionary<string, object>
             {
-                { "Nombre", cliente.Nombre }
+                { "complement", cliente.complement },
+                { "cdtipodoc", cliente.cdtipodoc },
+                { "Nombre", cliente.Nombre },
+                { "direccion", cliente.direccion },
+                { "telefonos", cliente.telefonos },
+                { "celular_wa", cliente.celular_wa },
+                { "email", cliente.email }
             });
 
             return response.Result != null;

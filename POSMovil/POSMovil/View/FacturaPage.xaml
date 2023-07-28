@@ -1,17 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fonts="clr-namespace:POSMovil.Fonts;assembly=POSMovil"
              x:Class="POSMovil.View.FacturaPage">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="30" Spacing="20">
                 <StackLayout>
-                    <Label  Text="CI o Nit" Padding="2" />
-                    <Entry x:Name="BoxNit" IsTextPredictionEnabled="False" TextTransform="Uppercase" Text="0" MaxLength="13" Keyboard="Numeric"/>
+                    <Label  Text="Documento Identidad" Padding="2" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Entry x:Name="BoxNit" IsTextPredictionEnabled="False" MaxLength="13" Keyboard="Numeric"/>
+                        <Button x:Name="BtnCrearCliente" FontFamily="iconsapp"  Text="{x:Static fonts:Icons.UserAdd}" FontSize="20" CornerRadius="10" BackgroundColor="#32D85A" TextColor="Gray" Margin="2" Grid.Column="1" />
+                    </Grid>
                 </StackLayout>
                 <StackLayout>
-                    <Label  Text="Nombre o Razón social" Padding="2" />
-                    <Entry x:Name="BoxNombre" IsTextPredictionEnabled="False" TextTransform="Uppercase" Text="SIN NOMBRE" MaxLength="80"/>
+                    <Label  Text="Nombre o Razón Social" Padding="2" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="lblNombre"  Text="" FontSize="17" TextColor="Black" Padding="2" VerticalOptions="Center"/>
+                        <Button x:Name="BtnEditarCliente" FontFamily="iconsapp"  Text="{x:Static fonts:Icons.Pencil}" FontSize="20" CornerRadius="10" BackgroundColor="#F6D850" TextColor="Gray" Margin="2" Grid.Column="1" />
+                    </Grid>
                 </StackLayout>
                 <StackLayout>
                     <Label  Text="Detalle o Concepto" Padding="2" />

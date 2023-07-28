@@ -50,21 +50,19 @@ namespace POSMovil
             }
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
-                await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para iniciar sesión", "Aceptar");
+                await DisplayAlert("PC-POS Móvil", "No tiene acceso a internet, vuelva a intentar", "Aceptar");
                 return;
             }
             Cargador.IsRunning = true;
-            var userindb = await new UserRequest(App.RestClient).Get(usuario);
-            if (userindb != null)
+            var user = await new UserRequest(App.RestClient).Get(usuario);
+            if (user != null)
             {
-                var firstUser = userindb.ElementAt(0);
-                User user = User.FromUsuario(firstUser);
-                if (password == user.Password)
+                if (password == user.password)
                 {
                     if (user.Cmd_99_Acc == 1) 
                     {
-                        App.Current.Properties["name"] = user.Nombre;
-                        App.Current.Properties["user"] = user.Id;
+                        App.Current.Properties["name"] = user.nombre;
+                        App.Current.Properties["user"] = user.id;
                         App.Current.Properties["limpieza"] = false;
                         App.Current.Properties["mudanza"] = false;
                         foreach (var permiso in user.Cmd_99)
@@ -86,14 +84,14 @@ namespace POSMovil
                 else 
                 {
                     Cargador.IsRunning = false;
-                    await DisplayAlert("PC-POS Móvil", "La contraseña ingresada no es correcta", "Aceptar");
+                    await DisplayAlert("PC-POS Móvil", "Contraseña erronea", "Aceptar");
                     return;
                 }
             }
             else 
             {
                 Cargador.IsRunning = false;
-                await DisplayAlert("PC-POS Móvil", "El usuario ingresado no esta registrado", "Aceptar");
+                await DisplayAlert("PC-POS Móvil", "El usuario no esta registrado", "Aceptar");
                 return;
             }
         }

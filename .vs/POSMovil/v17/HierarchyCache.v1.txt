@@ -1,0 +1,282 @@
+﻿++Solución "POSMovil" ‎(3 de 3 proyectos)
+i:{00000000-0000-0000-0000-000000000000}:POSMovil.sln
+++Solution Items
+i:{00000000-0000-0000-0000-000000000000}:Solution Items
+++.editorconfig
+i:{8f38f1e3-b796-4fd3-a235-427351a31921}:F:\Padrino\Projects\Nexxo\posmovil - factonline\.editorconfig
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\.editorconfig
+++POSMovil.iOS
+i:{00000000-0000-0000-0000-000000000000}:POSMovil.iOS
+++Properties
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\properties\
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\properties\
+++Referencias
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++Catálogos de activos
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+++Referencias nativas
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+++Resources
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\resources\
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\
+++AppDelegate.cs
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\appdelegate.cs
+++Entitlements.plist
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\entitlements.plist
+++Info.plist
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\info.plist
+++Main.cs
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\main.cs
+++AssemblyInfo.cs
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\properties\assemblyinfo.cs
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\properties\assemblyinfo.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\assemblyinfo.cs
+++POSMovil
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+i:{00000000-0000-0000-0000-000000000000}:POSMovil
+++System
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++System.Core
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++System.Numerics
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++System.Numerics.Vectors
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++System.Xml
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++Xamarin.Essentials
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++Xamarin.Forms
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++Xamarin.iOS
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+++Assets
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\assets\
+++avatar.png
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\resources\avatar.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\drawable\avatar.png
+++LaunchScreen.storyboard
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\resources\launchscreen.storyboard
+++logout.png
+i:{ab300d68-41a6-4bc8-99ca-ff9f6ebdc9e4}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.ios\resources\logout.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\drawable\logout.png
+++POSMovil.Android
+i:{00000000-0000-0000-0000-000000000000}:POSMovil.Android
+++MainActivity.cs
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\mainactivity.cs
+++MainApplication.cs
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\mainapplication.cs
+++AndroidManifest.xml
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\properties\androidmanifest.xml
+++LinkOS_Xamarin_SDK
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++Mono.Android
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++System.Xml.Linq
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:
+++AboutAssets.txt
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\assets\aboutassets.txt
+++drawable
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\drawable\
+++layout
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\layout\
+++mipmap-anydpi-v26
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-anydpi-v26\
+++mipmap-hdpi
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-hdpi\
+++mipmap-mdpi
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-mdpi\
+++mipmap-xhdpi
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xhdpi\
+++mipmap-xxhdpi
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xxhdpi\
+++mipmap-xxxhdpi
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xxxhdpi\
+++values
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\values\
+++AboutResources.txt
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\aboutresources.txt
+++Resource.designer.cs
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\resource.designer.cs
+++InOut.ico
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\drawable\inout.ico
+++logo.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\drawable\logo.png
+++Tabbar.xml
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\layout\tabbar.xml
+++Toolbar.xml
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\layout\toolbar.xml
+++icon.xml
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-anydpi-v26\icon.xml
+++icon_round.xml
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-anydpi-v26\icon_round.xml
+++icon.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-hdpi\icon.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-mdpi\icon.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xhdpi\icon.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xxhdpi\icon.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xxxhdpi\icon.png
+++launcher_foreground.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-hdpi\launcher_foreground.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-mdpi\launcher_foreground.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xhdpi\launcher_foreground.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xxhdpi\launcher_foreground.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xxxhdpi\launcher_foreground.png
+++logo_posmovil.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-hdpi\logo_posmovil.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-mdpi\logo_posmovil.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xhdpi\logo_posmovil.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xxhdpi\logo_posmovil.png
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\mipmap-xxxhdpi\logo_posmovil.png
+++colors.xml
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\values\colors.xml
+++styles.xml
+i:{0b9c85a7-b453-4545-a532-94db1fb2caeb}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil.android\resources\values\styles.xml
+++Dependencias
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>236
+++API
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\
+++Codigos
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\codigos\
+++Fonts
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\fonts\
+++fullicons.ttf
+++Icons.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\fonts\icons.cs
+++Model
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\model\
+++OpenAPIs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\openapis\
+++Sesion
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\sesion\
+++View
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\
+++AddUserPage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\adduserpage.xaml
+++ClientePage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\clientepage.xaml
+++ClientePage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\clientepage.xaml.cs
+++FacturaPage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\facturapage.xaml
+++FacturaPage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\facturapage.xaml.cs
+++HomePage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\homepage.xaml
+++LoginPage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\loginpage.xaml
+++MainPage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\mainpage.xaml
+++PrintPage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\printpage.xaml
+++ReImpresionPage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\reimpresionpage.xaml
+++UserPage.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\userpage.xaml
+++App.xaml
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\app.xaml
+++App.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\app.xaml.cs
+++ShinyAppStartup.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\shinyappstartup.cs
+++Paquetes
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:paquetes
+++Cliente.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\cliente.cs
+++ClientRequest.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\clientrequest.cs
+++Counter.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\counter.cs
+++CounterRequest.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\counterrequest.cs
+++Dosificacion.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\dosificacion.cs
+++DosificacionRequest.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\dosificacionrequest.cs
+++Factura.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\factura.cs
+++FacturacionCodigos.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\facturacioncodigos.cs
+++FacturaDetalle.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\facturadetalle.cs
+++FacturaDetalleRequest.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\facturadetallerequest.cs
+++FacturaRequest.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\facturarequest.cs
+++HttpClient.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\httpclient.cs
+++HttpResponse.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\httpresponse.cs
+++Impresion.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\impresion.cs
+++Parametros.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\parametros.cs
+++ParametrosResponse.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\parametrosresponse.cs
+++StatusResponse.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\statusresponse.cs
+++UserRequest.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\userrequest.cs
+++Usuario.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\api\usuario.cs
+++CodigoControl.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\codigos\codigocontrol.cs
+++Conversion.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\codigos\conversion.cs
+++Client.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\model\client.cs
+++User.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\model\user.cs
+++FacturacionCodigos.json
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\openapis\facturacioncodigos.json
+++ILoginManager.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\sesion\iloginmanager.cs
+++LoginModalPager.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\sesion\loginmodalpager.cs
+++AddUserPage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\adduserpage.xaml.cs
+++HomePage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\homepage.xaml.cs
+++LoginPage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\loginpage.xaml.cs
+++MainPage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\mainpage.xaml.cs
+++PrintPage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\printpage.xaml.cs
+++ReImpresionPage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\reimpresionpage.xaml.cs
+++UserPage.xaml.cs
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\view\userpage.xaml.cs
+++LinkOS_Xamarin_SDK (1.2.0)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>238
+++Microsoft.Extensions.ApiDescription.Client (3.0.0)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>246
+++NETStandard.Library (2.0.3)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>241
+++Newtonsoft.Json (13.0.1)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>239
+++NSwag.ApiDescription.Client (13.0.5)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>245
+++RestSharp (106.11.7)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>244
+++Shiny.BluetoothLE (1.1.0.1473-beta)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>242
+++Xamarin.Essentials (1.5.3.2)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>240
+++Xamarin.Forms (4.8.0.1687)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>247
+++Zebra.Printer.SDK (2.15.2634)
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:>243
+++iconsapp.ttf
+i:{a5b7fa8e-e380-4fca-9179-b02cbb657704}:f:\padrino\projects\nexxo\posmovil - factonline\posmovil\posmovil\fonts\iconsapp.ttf
+++AssemblyInfo.cs~RF1a9cafd.TMP

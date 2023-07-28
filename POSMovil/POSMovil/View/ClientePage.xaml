@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="POSMovil.View.ClientePage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="30" Spacing="20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout>
+                        <Label Padding="2">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="Documento de Identidad" />
+                                    <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Entry x:Name="boxNit" IsTextPredictionEnabled="False" MaxLength="13" Keyboard="Numeric" Text="{Binding cliente.nit}"/>
+                    </StackLayout>
+                    <StackLayout Grid.Column="1">
+                        <Label Text="Complemento" Padding="2" />
+                        <Entry x:Name="boxComplemento" IsTextPredictionEnabled="False" MaxLength="5" Text="{Binding cliente.complement}" />
+                    </StackLayout>
+                </Grid>
+                <StackLayout>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Tipo de Documento de Identidad" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Picker x:Name="Cdtipodoc" Title="Selecione una opción de la lista" ItemsSource="{Binding Documentos}" ItemDisplayBinding="{Binding descripcio}" SelectedItem="{Binding DocumentoSeleccionado}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Nombre o Razon Social" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Entry x:Name="boxNombre" IsTextPredictionEnabled="False" MaxLength="150" TextTransform="Uppercase" Text="{Binding cliente.Nombre}"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Dirección" Padding="2"/>
+                    <Entry x:Name="boxDireccion" IsTextPredictionEnabled="False" MaxLength="150" TextTransform="Uppercase" Text="{Binding cliente.direccion}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Celular WhatsApp" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Entry x:Name="boxCelular" IsTextPredictionEnabled="False" MaxLength="13" Keyboard="Telephone" Text="{Binding cliente.celular_wa}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Teléfono" Padding="2"/>
+                    <Entry x:Name="boxTelefono" IsTextPredictionEnabled="False" MaxLength="50" Keyboard="Telephone" Text="{Binding cliente.telefonos}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Email" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Entry x:Name="boxEmail" IsTextPredictionEnabled="False" MaxLength="50" Keyboard="Email" Text="{Binding cliente.email}" />
+                </StackLayout>
+                <Button x:Name="btnGuardar" Text="Guardar"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -18,26 +18,43 @@ namespace POSMovil.View
     public partial class FacturaPage : ContentPage
     {
         private List<Cliente> _clients;
+        private Cliente _cliente;
+        private List<TipoDocumentoIdentidad> _documentos;
         private Parametros _parametros;
-        private long _nroauto;
         private int _actividad;
+        private Siat _siat;
         private Impresion _imp = new Impresion();
-        public FacturaPage(Parametros parametros, long nroauto, int actividad)
+        public FacturaPage(Parametros parametros, int actividad, Siat siat)
         {
             InitializeComponent();
             _parametros = parametros;
-            _nroauto = nroauto;
             _actividad = actividad;
+            _siat = siat;
+            BtnEditarCliente.IsEnabled = false;
+            BtnEditarCliente.IsVisible = false;
             BoxNit.Completed += BoxNit_Completed;
-            BoxNombre.Completed += BoxNombre_Completed;
             BtnFacturar.Clicked += BtnFacturar_Clicked;
+            BtnCrearCliente.Clicked += BtnCrearCliente_Clicked;
+            BtnEditarCliente.Clicked += BtnEditarCliente_Clicked;
+        }
+
+        private async void BtnEditarCliente_Clicked(object sender, EventArgs e)
+        {
+            await getDocumentos();
+            await Navigation.PushAsync(new ClientePage(cliente: _cliente, documentos: _documentos) { Title = "Editar Cliente" }, true);
+        }
+
+        private async void BtnCrearCliente_Clicked(object sender, EventArgs e)
+        {
+            await getDocumentos();
+            await Navigation.PushAsync(new ClientePage(documentos: _documentos) { Title = "Crear Cliente" },true);
         }
 
         private async void BtnFacturar_Clicked(object sender, EventArgs e)
         {
             BtnFacturar.IsEnabled = false;
             var nit = BoxNit.Text ?? "";
-            var nombre = BoxNombre.Text ?? "";
+            var nombre = lblNombre.Text ?? "";
             var concepto = BoxDetalle.Text ?? "";
             var total = BoxTotal.Text ?? "";
             var fecha = DateTime.Now;
@@ -45,13 +62,13 @@ namespace POSMovil.View
 
             if (string.IsNullOrEmpty(nit))
             {
-                await DisplayAlert("POS Móvil", "Ingrese un nit", "Aceptar");
+                await DisplayAlert("POS Móvil", "Ingrese un documento de identidad registrado", "Aceptar");
                 BtnFacturar.IsEnabled = true;
                 return;
             }
             if (string.IsNullOrEmpty(nombre))
             {
-                await DisplayAlert("POS Móvil", "Ingrese un nombre", "Aceptar");
+                await DisplayAlert("POS Móvil", "Cliente debe tener un nombre o razon social", "Aceptar");
                 BtnFacturar.IsEnabled = true;
                 return;
             }
@@ -75,7 +92,6 @@ namespace POSMovil.View
             }
             nombre = nombre.ToUpper();
             nombre = nombre.Trim();
-            string limpio = Regex.Replace(nombre, @"[^\\ 0]+", "");
             concepto = concepto.ToUpper();
             Cargador.IsVisible = true;
             Cargador.IsRunning = true;
@@ -163,7 +179,7 @@ namespace POSMovil.View
                     bool tres = await new CounterRequest(App.RestClient).Update(count1, 1);
                     await DisplayAlert("PC-POS Móvil", "Factura registrada", "Aceptar");
                     BoxNit.Text = "0";
-                    BoxNombre.Text = "SIN NOMBRE";
+                    lblNombre.Text = "SIN NOMBRE";
                     BoxDetalle.Text = "";
                     BoxTotal.Text = "";
                     if (cbOriginal.IsChecked == true)
@@ -211,10 +227,10 @@ namespace POSMovil.View
 
         private async void BoxNombre_Completed(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(BoxNombre.Text))
+            if (string.IsNullOrEmpty(lblNombre.Text))
             {
                 await DisplayAlert("PC-POS Móvil", "Ingrese un nombre o razón", "Aceptar");
-                BoxNombre.Focus();
+                lblNombre.Focus();
                 return;
             }
             if (BoxNit.Text != "0" && BoxNit.Text != "")
@@ -227,11 +243,10 @@ namespace POSMovil.View
                 var cliente = await new ClientRequest(App.RestClient).Get(long.Parse(BoxNit.Text));
                 if (cliente != null)
                 {
-                    var firstClient = cliente.ElementAt(0);
-                    if (BoxNombre.Text != firstClient.Nombre)
+                    if (lblNombre.Text != cliente.Nombre)
                     {
-                        firstClient.Nombre = BoxNombre.Text;
-                        if (await new ClientRequest(App.RestClient).Update(firstClient, long.Parse(BoxNit.Text)))
+                        cliente.Nombre = lblNombre.Text;
+                        if (await new ClientRequest(App.RestClient).Update(cliente, long.Parse(BoxNit.Text)))
                         {
                             await DisplayAlert("PC-POS Móvil", "Cliente actualizado", "Aceptar");
                         }
@@ -246,7 +261,7 @@ namespace POSMovil.View
                     Cliente client = new Cliente
                     {
                         nit = long.Parse(BoxNit.Text),
-                        Nombre = BoxNombre.Text
+                        Nombre = lblNombre.Text
                     };
                     if (await new ClientRequest(App.RestClient).Add(client))
                     {
@@ -263,12 +278,16 @@ namespace POSMovil.View
 
         private async void BoxNit_Completed(object sender, EventArgs e)
         {
-            if (BoxNit.Text == "")
+            lblNombre.Text = "";
+            BtnEditarCliente.IsVisible = false;
+            BtnEditarCliente.IsEnabled = false;
+            _cliente = null;
+            if (BoxNit.Text == "" || BoxNit.Text == "0")
             {
-                BoxNit.Text = "0";
+                await DisplayAlert("PC-POS Móvil", "Documento identidad no puede estar vacio o ser 0", "Aceptar");
+                return;
             }
             var nit = long.Parse(BoxNit.Text);
-            bool existe = false;
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para buscar los datos del cliente", "Aceptar");
@@ -279,31 +298,27 @@ namespace POSMovil.View
             {
                 if (item.nit == nit)
                 {
-                    BoxNombre.Text = item.Nombre;
-                    BoxNombre.CursorPosition = 0;
-                    BoxNombre.SelectionLength = item.Nombre.Length;
-                    existe = true;
+                    lblNombre.Text = item.Nombre;
+                    BoxDetalle.Focus();
+                    _cliente = item;
+                    BtnEditarCliente.IsVisible = true;
+                    BtnEditarCliente.IsEnabled = true;
+                    return;
                 }
             }
-            if (!existe)
-            {
-                if (BoxNit.Text != "0")
-                {
-                    BoxNombre.Text = "<INGRESE NOMBRE>";
-                    BoxNombre.CursorPosition = 0;
-                    BoxNombre.SelectionLength = 31;
-                }
-                else
-                {
-                    BoxNombre.Text = "SIN NOMBRE";
-                    BoxNombre.Focus();
-                }
-            }
+            BoxNit.Focus();
+            await DisplayAlert("PC-POS Móvil", "Cliente no registrado, regitre al cliente", "Aceptar");
+            return;
         }
 
         private async Task refresh()
         {
             _clients = await new ClientRequest(App.RestClient).All();
+        }
+
+        private async Task getDocumentos()
+        {
+            _documentos = await new TipoDocumentoIdentidadRequest(App.RestClient).All();
         }
 
         private string CuerpoFactura(Dosificacion dosific, Factura facmae, FacturaDetalle facdet, string tipo) 

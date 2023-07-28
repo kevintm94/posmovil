@@ -14,9 +14,9 @@ namespace POSMovil.API
             else throw new NullReferenceException("El cliente http no puede se null");
         }
 
-        public async Task<List<Parametros>> Get()
+        public async Task<Parametros> Get(int id)
         {
-            var response = await _restclient.GetAsync<List<Parametros>>($"{App.BaseUrl}/factura/paramgen");
+            var response = await _restclient.GetAsync<Parametros>($"{App.BaseUrl}/parametro/{id}");
 
             if (response.Result != null) return response.Result;
 

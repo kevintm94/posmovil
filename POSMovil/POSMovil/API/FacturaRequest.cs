@@ -17,17 +17,17 @@ namespace POSMovil.API
 
         public async Task<List<Factura>> All()
         {
-            var response = await _restclient.GetAsync<List<Factura>>($"{App.BaseUrl}/factura/all");
+            var response = await _restclient.GetAsync<List<Factura>>($"{App.BaseUrl}/cabecera");
 
             if (response.Result != null) return response.Result;
 
             return new List<Factura>();
         }
 
-        public async Task<List<Factura>> Get(int id)
+        public async Task<Factura> Get(int id)
         {
 
-            var response = await _restclient.GetAsync<List<Factura>>($"{App.BaseUrl}/factura/getfact/{id}");
+            var response = await _restclient.GetAsync<Factura>($"{App.BaseUrl}/cabecera/{id}");
 
             if (response.Result != null) return response.Result;
 
@@ -37,7 +37,7 @@ namespace POSMovil.API
         public async Task<List<Factura>> GetRI(string user, long auto)
         {
 
-            var response = await _restclient.GetAsync<List<Factura>>($"{App.BaseUrl}/factura/getfactreimp/{user}-{auto}");
+            var response = await _restclient.GetAsync<List<Factura>>($"{App.BaseUrl}/cabecera/getfactreimp/{user}-{auto}");
 
             if (response.Result != null) return response.Result;
 
@@ -46,32 +46,50 @@ namespace POSMovil.API
 
         public async Task<bool> Add(Factura factura)
         {
-            var response = await _restclient.ExecuteAsync<Factura>(Method.POST, $"{App.BaseUrl}/factura/addfact", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<Factura>(Method.POST, $"{App.BaseUrl}/cabecera", new Dictionary<string, object> 
             {
-                { "idfact", factura.idfact},
-                { "fecha", factura.fecha },
-                { "nrofact", factura.nrofact },
-                { "nroauto", factura.nroauto },
-                { "estado", factura.estado },
-                { "nit", factura.nit },
-                { "nombre", factura.nombre },
-                { "importe", factura.importe.ToString().Replace(',','.') },
-                { "ice", factura.ice },
-                { "export", factura.export },
-                { "vent_tcero", factura.vent_tcero },
-                { "subtotal", factura.subtotal },
-                { "descuentos", factura.descuentos },
-                { "impbase_df", factura.impbase_df },
-                { "debitof", factura.debitof },
-                { "cod_ctrl", factura.cod_ctrl },
-                { "actividad", factura.actividad },
-                { "nro_suc", factura.nro_suc },
-                { "tot_a_pag", factura.tot_a_pag.ToString().Replace(',','.') },
-                { "Recibido", factura.Recibido },
-                { "Cambio", factura.Cambio },
-                { "hora", factura.hora },
-                { "userid", factura.userid },
-                { "fechalim", factura.fechalim }
+                { "idfact",     factura.idfact },
+                { "fh",         factura.fh },
+                { "nrofact",    factura.nrofact },
+                { "nit",        factura.nit },
+                { "complement", factura.complement },
+                { "cdtipodoc",  factura.cdtipodoc },
+                { "codclie",    factura.codclie },
+                { "nombre",     factura.nombre },
+                { "codmetpag",  factura.codmetpag },
+                { "nrotarjeta", factura.nrotarjeta },
+                { "subtotal",   factura.subtotal },
+                { "descuento",  factura.descuento },
+                { "total",      factura.total },
+                { "gift",       factura.gift },
+                { "montoapag",  factura.montoapag },
+                { "base_cf",    factura.base_cf },
+                { "debitof",    factura.debitof },
+                { "fecha_emi",  factura.fecha_emi },
+                { "cuf",        factura.cuf },
+                { "tipo_fact",  factura.tipo_fact },
+                { "tipdocsec",  factura.tipdocsec },
+                { "tipo_emi",   factura.tipo_emi },
+                { "tipo_emi2",  factura.tipo_emi2 },
+                { "codmoneda",  factura.codmoneda },
+                { "montotmnd",  factura.montotmnd },
+                { "codexcep",   factura.codexcep },
+                { "cafc",       factura.cafc },
+                { "leyenda",    factura.leyenda },
+                { "cod_recep",  factura.cod_recep },
+                { "facstatus",  factura.facstatus },
+                { "cufd",       factura.cufd },
+                { "cufdcdctrl", factura.cufdcdctrl },
+                { "pqte",       factura.pqte },
+                { "cod_anula",  factura.cod_anula },
+                { "cod_ev_sig", factura.cod_ev_sig },
+                { "celular_wa", factura.celular_wa },
+                { "email",      factura.email },
+                { "cod_res",    factura.cod_res },
+                { "cod_es",     factura.cod_es },
+                { "desc_es",    factura.desc_es },
+                { "sucursal",   factura.sucursal },
+                { " ptovta",    factura.ptovta }
             });
 
             return response.Result != null;
@@ -79,32 +97,50 @@ namespace POSMovil.API
 
         public async Task<bool> Update(Factura factura, long id)
         {
-            var response = await _restclient.ExecuteAsync<Factura>(Method.POST, $"{App.BaseUrl}/factura/updatefact/{id}", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<Factura>(Method.PUT, $"{App.BaseUrl}/cabecera/{id}", new Dictionary<string, object>
             {
-                { "idfact", id },
-                { "fecha", factura.fecha },
-                { "nrofact", factura.nrofact },
-                { "nroauto", factura.nroauto },
-                { "estado", factura.estado },
-                { "nit", factura.nit },
-                { "nombre", factura.nombre },
-                { "importe", factura.importe },
-                { "ice", factura.ice },
-                { "export", factura.export },
-                { "vent_tcero", factura.vent_tcero },
-                { "subtotal", factura.subtotal },
-                { "descuentos", factura.descuentos },
-                { "impbase_df", factura.impbase_df },
-                { "debitof", factura.debitof },
-                { "cod_ctrl", factura.cod_ctrl },
-                { "actividad", factura.actividad },
-                { "nro_suc", factura.nro_suc },
-                { "tot_a_pag", factura.tot_a_pag },
-                { "Recibido", factura.Recibido },
-                { "Cambio", factura.Cambio },
-                { "hora", factura.hora },
-                { "userid", factura.userid },
-                { "fechalim", factura.fechalim }
+                { "idfact",     id },
+                { "fh",         factura.fh },
+                { "nrofact",    factura.nrofact },
+                { "nit",        factura.nit },
+                { "complement", factura.complement },
+                { "cdtipodoc",  factura.cdtipodoc },
+                { "codclie",    factura.codclie },
+                { "nombre",     factura.nombre },
+                { "codmetpag",  factura.codmetpag },
+                { "nrotarjeta", factura.nrotarjeta },
+                { "subtotal",   factura.subtotal },
+                { "descuento",  factura.descuento },
+                { "total",      factura.total },
+                { "gift",       factura.gift },
+                { "montoapag",  factura.montoapag },
+                { "base_cf",    factura.base_cf },
+                { "debitof",    factura.debitof },
+                { "fecha_emi",  factura.fecha_emi },
+                { "cuf",        factura.cuf },
+                { "tipo_fact",  factura.tipo_fact },
+                { "tipdocsec",  factura.tipdocsec },
+                { "tipo_emi",   factura.tipo_emi },
+                { "tipo_emi2",  factura.tipo_emi2 },
+                { "codmoneda",  factura.codmoneda },
+                { "montotmnd",  factura.montotmnd },
+                { "codexcep",   factura.codexcep },
+                { "cafc",       factura.cafc },
+                { "leyenda",    factura.leyenda },
+                { "cod_recep",  factura.cod_recep },
+                { "facstatus",  factura.facstatus },
+                { "cufd",       factura.cufd },
+                { "cufdcdctrl", factura.cufdcdctrl },
+                { "pqte",       factura.pqte },
+                { "cod_anula",  factura.cod_anula },
+                { "cod_ev_sig", factura.cod_ev_sig },
+                { "celular_wa", factura.celular_wa },
+                { "email",      factura.email },
+                { "cod_res",    factura.cod_res },
+                { "cod_es",     factura.cod_es },
+                { "desc_es",    factura.desc_es },
+                { "sucursal",   factura.sucursal },
+                { " ptovta",    factura.ptovta }
             });
 
             return response.Result != null;
@@ -112,7 +148,7 @@ namespace POSMovil.API
 
         public async Task<bool> Delete(string id)
         {
-            var response = await _restclient.GetAsync<StatusResponse>($"{App.BaseUrl}/factura/deletefact/{id}");
+            var response = await _restclient.ExecuteAsync<StatusResponse>(Method.DELETE, $"{App.BaseUrl}/cabecera/{id}");
 
             return response.Result != null && response.Result.code == 200;
         }

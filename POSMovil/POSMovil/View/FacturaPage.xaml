@@ -29,8 +29,19 @@
                     </Grid>
                 </StackLayout>
                 <StackLayout>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Servicios" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Picker x:Name="cboxProductos" Title="Selecione una opción de la lista" ItemsSource="{Binding Productos}" ItemDisplayBinding="{Binding descripcio}" SelectedItem="{Binding ProductoSeleccionado}"/>
+                </StackLayout>
+                <StackLayout>
                     <Label  Text="Detalle o Concepto" Padding="2" />
-                    <Editor x:Name="BoxDetalle" IsTextPredictionEnabled="False" TextTransform="Uppercase" MaxLength="150" AutoSize="TextChanges"/>
+                    <Editor x:Name="BoxDetalle" IsTextPredictionEnabled="False" TextTransform="Uppercase" MaxLength="150" AutoSize="TextChanges" Text="{Binding ProductoSeleccionado.descripcio}"/>
                 </StackLayout>
                 <StackLayout>
                     <Label  Text="Total (Bs.)" Padding="2" />

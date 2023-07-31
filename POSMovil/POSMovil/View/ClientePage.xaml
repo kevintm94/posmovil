@@ -73,7 +73,6 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Email" />
-                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

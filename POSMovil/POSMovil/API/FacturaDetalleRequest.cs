@@ -15,10 +15,10 @@ namespace POSMovil.API
             else throw new NullReferenceException("El cliente http no puede se null");
         }
 
-        public async Task<List<FacturaDetalle>> Get(int id)
+        public async Task<FacturaDetalle> Get(int id)
         {
 
-            var response = await _restclient.GetAsync<List<FacturaDetalle>>($"{App.BaseUrl}/factura/getdetfact/{id}");
+            var response = await _restclient.GetAsync<FacturaDetalle>($"{App.BaseUrl}/factura/detalle/{id}");
 
             if (response.Result != null) return response.Result;
 
@@ -37,13 +37,19 @@ namespace POSMovil.API
 
         public async Task<bool> Add(FacturaDetalle factura)
         {
-            var response = await _restclient.ExecuteAsync<FacturaDetalle>(Method.POST, $"{App.BaseUrl}/factura/adddetfact", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<FacturaDetalle>(Method.POST, $"{App.BaseUrl}/detalle", new Dictionary<string, object>
             {
-                { "idfact", factura.idfact },
-                { "nroauto", factura.nroauto },
-                { "nrofact", factura.nrofact },
-                { "Concepto", factura.Concepto },
-                { "subtotal", factura.subtotal.ToString().Replace(',','.') }
+                { "idfact",     factura.idfact },
+                { "codigo",     factura.codigo },
+                { "descripcio", factura.descripcio },
+                { "pu",         factura.pu.ToString().Replace(',','.') },
+                { "cantidad",   factura.cantidad },
+                { "descuento",  factura.descuento.ToString().Replace(',','.') },
+                { "subtotal",   factura.subtotal.ToString().Replace(',','.') },
+                { "codprodsin", factura.codprodsin },
+                { "cod_caeb",   factura.cod_caeb },
+                { "unidadsin",  factura.unidadsin },
+                { "descunisin", factura.descunisin },
             });
 
             return response.Result != null;
@@ -51,13 +57,19 @@ namespace POSMovil.API
 
         public async Task<bool> Update(FacturaDetalle factura, long id)
         {
-            var response = await _restclient.ExecuteAsync<FacturaDetalle>(Method.POST, $"{App.BaseUrl}/factura/updatedetfact/{id}", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<FacturaDetalle>(Method.PUT, $"{App.BaseUrl}/detalle/{id}", new Dictionary<string, object>
             {
-                { "idfact", id },
-                { "nroauto", factura.nroauto },
-                { "nrofact", factura.nrofact },
-                { "Concepto", factura.Concepto },
-                { "subtotal", factura.subtotal }
+                { "idfact",     factura.idfact },
+                { "codigo",     factura.codigo },
+                { "descripcio", factura.descripcio },
+                { "pu",         factura.pu.ToString().Replace(',','.') },
+                { "cantidad",   factura.cantidad },
+                { "descuento",  factura.descuento.ToString().Replace(',','.') },
+                { "subtotal",   factura.subtotal.ToString().Replace(',','.') },
+                { "codprodsin", factura.codprodsin },
+                { "cod_caeb",   factura.cod_caeb },
+                { "unidadsin",  factura.unidadsin },
+                { "descunisin", factura.descunisin }
             });
 
             return response.Result != null;
@@ -65,7 +77,7 @@ namespace POSMovil.API
 
         public async Task<bool> Delete(string id)
         {
-            var response = await _restclient.GetAsync<StatusResponse>($"{App.BaseUrl}/factura/deletedetfact/{id}");
+            var response = await _restclient.ExecuteAsync<StatusResponse>(Method.DELETE, $"{App.BaseUrl}/detalle/{id}");
 
             return response.Result != null && response.Result.code == 200;
         }

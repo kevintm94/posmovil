@@ -148,9 +148,9 @@ namespace POSMovil.View
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para facturar", "Aceptar");
                 return;
             }
-            Siat siat = await new SiatRequest(App.RestClient).Find(0, 2, "CV");
+            Siat siat = await new SiatRequest(App.RestClient).Find(0, 1, "CV");
             Parametros parametros = await new ParametrosResponse(App.RestClient).Get(1);
-            await Navigation.PushAsync(new FacturaPage(parametros, 324110, siat) { Title = "Factura de Mudanza" }, true);
+            await Navigation.PushAsync(new FacturaPage(parametros, 522921, siat) { Title = "Factura de Mudanza" }, true);
         }
 
         private async void BtnLimpieza_Clicked(object sender, EventArgs e)
@@ -160,9 +160,9 @@ namespace POSMovil.View
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para facturar", "Aceptar");
                 return;
             }
-            Siat siat = await new SiatRequest(App.RestClient).Find(0, 1, "CV");
+            Siat siat = await new SiatRequest(App.RestClient).Find(0, 2, "CV");
             Parametros parametros = await new ParametrosResponse(App.RestClient).Get(1);
-            await Navigation.PushAsync(new FacturaPage(parametros, 3241312, siat) { Title = "Factura de Limpieza" }, true);
+            await Navigation.PushAsync(new FacturaPage(parametros, 810000, siat) { Title = "Factura de Limpieza" }, true);
         }
 
         private void BtnLogOut_Clicked(object sender, EventArgs e)

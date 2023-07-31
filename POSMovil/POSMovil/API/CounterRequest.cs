@@ -15,9 +15,9 @@ namespace POSMovil.API
             else throw new NullReferenceException("El cliente http no puede se null");
         }
 
-        public async Task<List<Counter>> Get()
+        public async Task<Counter> Get(int id)
         {
-            var response = await _restclient.GetAsync<List<Counter>>($"{App.BaseUrl}/factura/counter");
+            var response = await _restclient.GetAsync<Counter>($"{App.BaseUrl}/counter/{id}");
 
             if (response.Result != null) return response.Result;
 
@@ -26,10 +26,17 @@ namespace POSMovil.API
 
         public async Task<bool> Update(Counter counter, int id)
         {
-            var response = await _restclient.ExecuteAsync<Counter>(Method.POST, $"{App.BaseUrl}/factura/updatecounter/{id}", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<Counter>(Method.POST, $"{App.BaseUrl}/counter/{id}", new Dictionary<string, object>
             {
                 { "idfact", counter.idfact },
-                { "rlock", counter.rlock }
+                { "nrofact_0", counter.nrofact_0 },
+                { "nrofact_1", counter.nrofact_1 },
+                { "nrofact_2", counter.nrofact_2 },
+                { "rlock", counter.rlock },
+                { "a00", counter.a00 },
+                { "a01", counter.a01 },
+                { "a02", counter.a02 },
+                { "a03", counter.a03 }
             });
 
             return response.Result != null;

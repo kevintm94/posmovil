@@ -24,6 +24,7 @@ namespace POSMovil.View
         private int _actividad;
         private Siat _siat;
         private Impresion _imp = new Impresion();
+
         public FacturaPage(Parametros parametros, int actividad, Siat siat)
         {
             InitializeComponent();
@@ -59,6 +60,7 @@ namespace POSMovil.View
             var total = BoxTotal.Text ?? "";
             var fecha = DateTime.Now;
             var usuario = App.Current.Properties["user"];
+            var producto = (Producto)cboxProductos.SelectedItem;
 
             if (string.IsNullOrEmpty(nit))
             {
@@ -84,6 +86,12 @@ namespace POSMovil.View
                 BtnFacturar.IsEnabled = true;
                 return;
             }
+            if (producto == null)
+            {
+                await DisplayAlert("POS Móvil", "Seleccione un servicio de la lista", "Aceptar");
+                BtnFacturar.IsEnabled = true;
+                return;
+            }
             if (Connectivity.NetworkAccess != NetworkAccess.Internet)
             {
                 await DisplayAlert("PC-POS Móvil", "Debe tener acceso a internet para generar una factura", "Aceptar");
@@ -95,77 +103,110 @@ namespace POSMovil.View
             concepto = concepto.ToUpper();
             Cargador.IsVisible = true;
             Cargador.IsRunning = true;
-            var dosific = await new DosificacionRequest(App.RestClient).Get(_nroauto);
-            if (dosific == null)
-            {
-                await DisplayAlert("PC-POS Móvil", "Dosificación inválida, cierre la aplicación y vuelva a ingresar, si el error persiste contacte al administrador", "Aceptar");
-                Cargador.IsVisible = false;
-                Cargador.IsRunning = false;
-                return;
-            }
-            Dosificacion dosific1 = dosific.ElementAt(0);
-            DateTime fechalim = DateTime.ParseExact(dosific1.fechalim, "yyyy-MM-dd", null);
-            
-            int validarVigencia = DateTime.Compare(fechalim, fecha);
+
+            int validarVigencia = DateTime.Compare(_siat.cufd_fv, fecha);
             if (validarVigencia < 0)
             {
-                await DisplayAlert("PC-POS Móvil", "La dosificación expiró, contacte al administrador", "Aceptar");
+                await DisplayAlert("PC-POS Móvil", "Código único de facturación diaria expirado, contacte al administrador", "Aceptar");
                 Cargador.IsVisible = false;
                 Cargador.IsRunning = false;
                 return;
             }
             
-            int nrofactura = dosific1.ultima + 1;
-            var count = await new CounterRequest(App.RestClient).Get();
-            Counter count1 = count.ElementAt(0);
-            int idfactura = count1.idfact + 1;
-            CodigoControl codigo = new CodigoControl
-            {
-                _llavedosific = dosific1.llave,
-                _nroauto = _nroauto + "",
-                _nrofact = nrofactura + "",
-                _nit = nit,
-                _fecha = fecha.ToString("yyyyMMdd"),
-                _total = total
-            };
+            var count = await new CounterRequest(App.RestClient).Get(1);
+            int idfactura = count.idfact + 1;
+            int nrofactura = (_siat.ptovta == 1) ? count.nrofact_1 + 1 : count.nrofact_2 + 1;
 
-            string codigoControl = codigo.Generar();
+            string fechaCuf = fecha.ToString("yyyyMMddHHmmssFFF");
+            if (fechaCuf.Length == 16) fechaCuf += "0";
+            if (fechaCuf.Length == 15) fechaCuf += "00";
+            if (fechaCuf.Length == 14) fechaCuf += "000";
+
+            /**GENERAR CUF*/
+            #region Generando CUF
+            Cuf cuf = new Cuf();
+            cuf.FechaEmisor = long.Parse(fechaCuf);
+            cuf.Modalidad = 2;
+            cuf.NitEmisor = _parametros.nit + "";
+            cuf.NumeroFactura = nrofactura + "";
+            cuf.PuntoVenta = _siat.ptovta + "";
+            cuf.Sucursal = _siat.sucursal + "";
+            cuf.TipoDocSector = _siat.tipdocsec + "";
+            cuf.TipoEmision = 2;
+            cuf.TipoFactura = 1;
+
+            string cufGenerado = cuf.generarCuf(true);
+            cufGenerado += _siat.cufdcdctrl;
+            #endregion
+
+            string fechaFac = fecha.ToString("yyyy-MM-ddTHH:mm:ss.FFF");
+            if (fechaFac.Length == 22) fechaFac += "0";
+            if (fechaFac.Length == 21) fechaFac += "00";
+            if (fechaFac.Length == 19) fechaFac += ".000";
+
+            var leyendas = await new LeyendaRequest(App.RestClient).Find(_actividad);
+            var rand = new Random();
 
             Factura facturaMae = new Factura
             {
                 idfact = idfactura,
-                fecha = fecha.ToString("yyyy-MM-dd"),
+                fh = fecha,
                 nrofact = nrofactura,
-                nroauto = _nroauto,
-                estado = 'V',
-                nit = long.Parse(nit),
+                nit = _cliente.nit + "",
+                complement = _cliente.complement,
+                cdtipodoc = (int)_cliente.cdtipodoc,
+                codclie = _cliente.nit + "",
                 nombre = nombre,
-                importe = Math.Round(double.Parse(total), 2),
-                ice = 0.00,
-                export = 0.00,
-                vent_tcero = 0.00,
-                subtotal = 0.00,
-                descuentos = 0.00,
-                impbase_df = 0.00,
-                debitof = 0.00,
-                cod_ctrl = codigoControl,
-                actividad = _actividad,
-                nro_suc = 0,
-                tot_a_pag = Math.Round(double.Parse(total), 2),
-                Recibido = 0.00,
-                Cambio = 0.00,
-                hora = fecha.ToString("HH:mm"),
-                userid = usuario.ToString(),
-                fechalim = dosific1.fechalim
+                codmetpag = 1,
+                nrotarjeta = 0,
+                subtotal = Math.Round(decimal.Parse(total), 2),
+                descuento = 0,
+                total = Math.Round(decimal.Parse(total), 2),
+                gift = 0,
+                montoapag = Math.Round(decimal.Parse(total), 2),
+                base_cf = Math.Round(decimal.Parse(total), 2),
+                debitof = 0,
+                fecha_emi = fechaFac,
+                cuf = cufGenerado,
+                tipo_fact = 1,
+                tipdocsec = _siat.tipdocsec,
+                tipo_emi = 2,
+                tipo_emi2 = 2,
+                codmoneda = 1,
+                montotmnd = Math.Round(decimal.Parse(total), 2),
+                codexcep = 1,
+                cafc = _siat.cafc,
+                leyenda = leyendas[rand.Next(0, leyendas.Count-1)].descripcio,
+                cod_recep = "",
+                facstatus = "FUERA DE LINEA",
+                cufd = _siat.cufd,
+                cufdcdctrl = _siat.cufdcdctrl,
+                pqte = 0,
+                cod_anula = 0,
+                cod_ev_sig = 0,
+                celular_wa = _cliente.celular_wa,
+                email = _cliente.email,
+                cod_res = 0,
+                cod_es = 0,
+                desc_es = "",
+                sucursal = _siat.sucursal,
+                ptovta = _siat.ptovta,
+                usercode = usuario.ToString(),
             };
 
             FacturaDetalle facturaDetalle = new FacturaDetalle 
             {
                 idfact = idfactura,
-                nroauto = _nroauto,
-                nrofact = nrofactura,
-                Concepto = concepto,
-                subtotal = Math.Round(double.Parse(total), 2)
+                codigo = producto.codigo,
+                descripcio = concepto,
+                pu = Math.Round(decimal.Parse(total), 2),
+                cantidad = 1,
+                descuento = 0,
+                subtotal = Math.Round(decimal.Parse(total), 2),
+                codprodsin = producto.codprodsin,
+                cod_caeb = producto.cod_caeb,
+                unidadsin = producto.unidadsin,
+                descunisin = "",
             };
 
             if (await new FacturaRequest(App.RestClient).Add(facturaMae))
@@ -173,41 +214,22 @@ namespace POSMovil.View
                 if (await new FacturaDetalleRequest(App.RestClient).Add(facturaDetalle))
                 {
                     bool primero = false;
-                    dosific1.ultima = nrofactura;
-                    bool dos = await new DosificacionRequest(App.RestClient).Update(dosific1, _nroauto);
-                    count1.idfact = idfactura;
-                    bool tres = await new CounterRequest(App.RestClient).Update(count1, 1);
+                    count.idfact = idfactura;
+                    if (_siat.ptovta == 1)
+                        count.nrofact_1 = nrofactura;
+                    else
+                        count.nrofact_2 = nrofactura;
+                    bool tres = await new CounterRequest(App.RestClient).Update(count, 1);
                     await DisplayAlert("PC-POS Móvil", "Factura registrada", "Aceptar");
                     BoxNit.Text = "0";
-                    lblNombre.Text = "SIN NOMBRE";
+                    lblNombre.Text = "";
                     BoxDetalle.Text = "";
                     BoxTotal.Text = "";
                     if (cbOriginal.IsChecked == true)
                     {
                         primero = true;
-                        string cuerpoFactura = CuerpoFactura(dosific1, facturaMae, facturaDetalle, "ORIGINAL CLIENTE");
+                        string cuerpoFactura = CuerpoFactura(facturaMae, facturaDetalle, "ORIGINAL CLIENTE");
                         await _imp.PrintBluetooth(cuerpoFactura);
-                    }
-                    if (cbCopiaConta.IsChecked)
-                    {
-                        if (primero)
-                        {
-                            await DisplayAlert("PC-POS Móvil", "Continuar con la impresión de la copia contabilidad", "Aceptar");
-                            primero = true;
-                        }
-                        string copiaC = CuerpoFactura(dosific1, facturaMae, facturaDetalle, "COPIA CONTABILIDAD");
-                        await _imp.PrintBluetooth(copiaC);
-                    }
-
-                    if (cbCopiaAdmin.IsChecked)
-                    {
-                        if (primero)
-                        {
-                            await DisplayAlert("PC-POS Móvil", "Continuar con la impresión de la copia administrativa", "Aceptar");
-                            primero = true;
-                        }
-                        string copiaA = CuerpoFactura(dosific1, facturaMae, facturaDetalle, "COPIA ADMINISTRATIVA"); ;
-                        await _imp.PrintBluetooth(copiaA);
                     }
 
                 }
@@ -321,10 +343,18 @@ namespace POSMovil.View
             _documentos = await new TipoDocumentoIdentidadRequest(App.RestClient).All();
         }
 
-        private string CuerpoFactura(Dosificacion dosific, Factura facmae, FacturaDetalle facdet, string tipo) 
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            var Productos = await new ProductoRequest(App.RestClient).Find(_actividad);
+
+            BindingContext = new { Productos };
+        }
+
+        private string CuerpoFactura(Factura facmae, FacturaDetalle facdet, string tipo) 
         {
             Conversion c = new Conversion();
-            string text = c.enletras(facmae.tot_a_pag + "");
+            string text = c.enletras(facmae.total + "");
             string nombre = facmae.nombre;
             text = text[0] + text.Substring(1).ToLower();
             text += " Bolivianos";
@@ -343,28 +373,14 @@ namespace POSMovil.View
             cadena += "^FO20,120^FB540,3,,C,0^FD" + tipo +"^FS";
             cadena += "^FO20,160^GB540,3,3^FS";
             cadena += "^FO20,180^FB540,3,,C,0^A0N,30,25^FDNIT: " + _parametros.nit + "^FS";
-            cadena += "^FO20,220^FB540,3,,C,0^A0N,30,25^FDFACTURA N°: " + dosific.ultima + "^FS";
-            cadena += "^FO20,260^FB540,3,,C,0^FDAUTORIZACIÓN N°: " + dosific.nroauto + "^FS";
+            cadena += "^FO20,220^FB540,3,,C,0^A0N,30,25^FDFACTURA N°: " + facmae.nrofact + "^FS";
+            cadena += "^FO20,260^FB540,3,,C,0^FDAUTORIZACIÓN N°: " + facmae.cuf + "^FS";
             cadena += "^FO20,300^GB540,3,3^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
-            switch (_actividad)
-            {
-                case 1:
-                    filas = (_parametros.actividad1.Length > 45) ? (_parametros.actividad1.Length / 45) + 1 : 1;
-                    cadena += "^LL" + ((filas * 40) + 5);
-                    cadena += "^FO20,0^FB540,3,10,J,0^FD" + _parametros.actividad1 + "^FS^XZ";
-                    break;
-                case 2:
-                    filas = (_parametros.actividad2.Length > 45) ? (_parametros.actividad2.Length / 45) + 1 : 1;
-                    cadena += "^LL" + ((filas * 40) + 5);
-                    cadena += "^FO20,0^FB540,3,10,J,0^FD" + _parametros.actividad2 + "^FS^XZ";
-                    break;
-            }
-            string[] split = facmae.fecha.Split("-".ToCharArray());
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL65";
             cadena += "^FO20,0^GB540,3,3^FS";
-            cadena += "^FO20,20^FB540,3,,J,0^FDFECHA: " + split[2] + "/" + split[1] + "/" + split[0] + " " + facmae.hora + "^FS";
-            cadena += "^FO420,20^FB540,3,,J,0^FDUsu.:" + facmae.userid + "^FS^XZ";
+            cadena += "^FO20,20^FB540,3,,J,0^FDFECHA: " + facmae.fh.ToString("dd") + "/" + facmae.fh.ToString("MM") + "/" + facmae.fh.ToString("yyyy") + " " + facmae.fh.ToString("hh:mm") + "^FS";
+            cadena += "^FO420,20^FB540,3,,J,0^FDUsu.:" + facmae.usercode + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
             filas = (nombre.Length > 30) ? (nombre.Length / 30) + 1 : 1;
             cadena += "^LL" + ((filas * 40) + 5);
@@ -378,28 +394,26 @@ namespace POSMovil.View
             cadena += "^FO430,60^FB540,3,,J,0^A0N,30,25^FDSUBTOT^FS";
             cadena += "^FO20,100^GB540,3,3^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
-            filas = (facdet.Concepto.Length > 33) ? (facdet.Concepto.Length / 33) + 1 : 1;
+            filas = (facdet.descripcio.Length > 33) ? (facdet.descripcio.Length / 33) + 1 : 1;
             cadena += "^LL" + ((filas * 40) + 45);
-            cadena += "^FO20,0^FB340,4,10,J,0^FD" + facdet.Concepto + "^FS";
+            cadena += "^FO20,0^FB340,4,10,J,0^FD" + facdet.descripcio + "^FS";
             cadena += "^FO430,0^FB540,3,,J,0^FD" + facdet.subtotal.ToString("#.00") + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL60";
             cadena += "^FO20,0^GB540,3,3^FS";
             cadena += "^FO20,20^FB390,3,,C,0^A0N,30,25^FDIMPORTE TOTAL Bs.^FS";
-            cadena += "^FO430,20^FB540,3,,J,0^A0N,30,25^FD" + facmae.tot_a_pag.ToString("#.00") + "^FS^XZ";
+            cadena += "^FO430,20^FB540,3,,J,0^A0N,30,25^FD" + facmae.total.ToString("#.00") + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
             filas = (text.Length > 40) ? (text.Length / 40) + 1 : 1;
             cadena += "^LL" + ((filas * 40) + 5);
             cadena += "^FO20,0^FB540,3,,J,0^A0N,30,25^FDSON: " + text + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL370";
-            cadena += "^FO20,0^FB540,3,,J,0^FDCÓDIGO DE CONTROL: " + facmae.cod_ctrl+ "^FS";
-            string[] fechaL = dosific.fechalim.Split("-".ToCharArray());
-            cadena += "^FO20,40^FB540,3,,J,0^FDFECHA LÍMITE DE EMISIÓN: " + fechaL[2] + "/" + fechaL[1] + "/" + fechaL[0] + "^FS";
-            cadena += "^FO160,80^BQN,2,7^FD.." + _parametros.nit + "|" + dosific.ultima + "|" + dosific.nroauto + "|" + facmae.fecha + "|" + Math.Round(facmae.tot_a_pag, 2) + "|" + Math.Round(facmae.tot_a_pag, 2) + "|" + facmae.cod_ctrl + "|" + facmae.nit + "|0|0|0|0^FS^XZ";
+            cadena += "^FO20,40^FB540,3,,J,0^FDFECHA LÍMITE DE EMISIÓN: ^FS";
+            cadena += "^FO160,80^BQN,2,7^FD.." + _parametros.nit + "|" + facmae.nrofact + "|" + facmae.cuf + "|" + facmae.fecha_emi + "|" + Math.Round(facmae.total, 2) + "|" + Math.Round(facmae.total, 2) + "|" + facmae.cuf + "|" + facmae.nit + "|0|0|0|0^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL350";
             cadena += "^FO20,0^FB540,3,10,J,0^FD\"ESTA FACTURA CONTRIBUYE AL DESARROLLO DEL PAIS.EL USO ILICITO DE ESTA SERA SANCIONADO DE ACUERDO A LA LEY\"^FS";
-            cadena += "^FO20,120^FB540,3,10,J,0^FDLEY No. 453: " + dosific.ley453 + "^FS";
+            cadena += "^FO20,120^FB540,3,10,J,0^FD" + facmae.leyenda + "^FS";
             cadena += "^FO20,240^GB540,3,3^FS";
-            cadena += "^FO20,260^FB540,3,10,J,0^FD" + _parametros.SaludoFin + "^FS^XZ";
+            cadena += "^FO20,260^FB540,3,10,J,0^FD SALUDO FINAL ^FS^XZ";
             cadena += "^XA^LL50^XZ";
             return cadena;
         }

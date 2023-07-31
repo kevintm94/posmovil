@@ -18,7 +18,7 @@ namespace POSMovil.API
         public async Task<List<Usuario>> All() 
         {
             
-            var response = await _restclient.GetAsync<List<Usuario>>( $"{App.BaseUrl}/user/all");
+            var response = await _restclient.GetAsync<List<Usuario>>( $"{App.BaseUrl}/user");
 
             if (response.Result != null) return response.Result;
 
@@ -37,7 +37,7 @@ namespace POSMovil.API
 
         public async Task<bool> Add(Usuario usuario)
         {
-            var response = await _restclient.ExecuteAsync<Usuario>(Method.POST, $"{App.BaseUrl}/user/add", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<Usuario>(Method.POST, $"{App.BaseUrl}/user", new Dictionary<string, object>
             {
                 { "id", usuario.id },
                 { "nombre", usuario.nombre },
@@ -51,14 +51,14 @@ namespace POSMovil.API
 
         public async Task<bool> Delete(string id)
         {
-            var response = await _restclient.ExecuteAsync<StatusResponse>(Method.GET, $"{App.BaseUrl}/user/delete/{id}");
+            var response = await _restclient.ExecuteAsync<StatusResponse>(Method.DELETE, $"{App.BaseUrl}/user/{id}");
 
             return response.Result != null && response.Result.code == 200;
         }
 
         public async Task<bool> Update(Usuario user, string id)
         {
-            var response = await _restclient.ExecuteAsync<Usuario>(Method.POST, $"{App.BaseUrl}/user/update/{id}", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<Usuario>(Method.PUT, $"{App.BaseUrl}/user/{id}", new Dictionary<string, object>
             {
                 { "id", user.id },
                 { "nombre", user.nombre },

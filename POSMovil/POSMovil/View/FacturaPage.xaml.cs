@@ -110,6 +110,7 @@ namespace POSMovil.View
                 await DisplayAlert("PC-POS Móvil", "Código único de facturación diaria expirado, contacte al administrador", "Aceptar");
                 Cargador.IsVisible = false;
                 Cargador.IsRunning = false;
+                BtnFacturar.IsEnabled = true;
                 return;
             }
             
@@ -154,7 +155,7 @@ namespace POSMovil.View
                 nrofact = nrofactura,
                 nit = _cliente.nit + "",
                 complement = _cliente.complement,
-                cdtipodoc = (int)_cliente.cdtipodoc,
+                cdtipodoc = _cliente.cdtipodoc,
                 codclie = _cliente.nit + "",
                 nombre = nombre,
                 codmetpag = 1,
@@ -210,38 +211,30 @@ namespace POSMovil.View
             };
 
             if (await new FacturaRequest(App.RestClient).Add(facturaMae))
-            {
                 if (await new FacturaDetalleRequest(App.RestClient).Add(facturaDetalle))
                 {
-                    bool primero = false;
                     count.idfact = idfactura;
                     if (_siat.ptovta == 1)
                         count.nrofact_1 = nrofactura;
                     else
                         count.nrofact_2 = nrofactura;
-                    bool tres = await new CounterRequest(App.RestClient).Update(count, 1);
+                    await new CounterRequest(App.RestClient).Update(count, 1);
                     await DisplayAlert("PC-POS Móvil", "Factura registrada", "Aceptar");
-                    BoxNit.Text = "0";
+                    BoxNit.Text = "";
                     lblNombre.Text = "";
                     BoxDetalle.Text = "";
                     BoxTotal.Text = "";
-                    if (cbOriginal.IsChecked == true)
+                    if (cbOriginal.IsChecked == false)
                     {
-                        primero = true;
-                        string cuerpoFactura = CuerpoFactura(facturaMae, facturaDetalle, "ORIGINAL CLIENTE");
+                        string cuerpoFactura = CuerpoFactura(facturaMae, facturaDetalle);
                         await _imp.PrintBluetooth(cuerpoFactura);
                     }
 
                 }
-                else 
-                {
+                else
                     await DisplayAlert("PC-POS Móvil", "No se pudo registrar la factura, vuelva a intentar", "Aceptar");
-                }
-            }
             else
-            {
                 await DisplayAlert("PC-POS Móvil", "No se pudo registrar la factura, vuelva a intentar", "Aceptar");
-            }
             Cargador.IsVisible = false;
             Cargador.IsRunning = false;
             BtnFacturar.IsEnabled = true;
@@ -350,8 +343,14 @@ namespace POSMovil.View
 
             BindingContext = new { Productos };
         }
+        private void cboxProductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var productoSeleccionado = (Producto)cboxProductos.SelectedItem;
+            BoxDetalle.Text = productoSeleccionado.descripcio + ": ";
+            BoxDetalle.Focus();
+        }
 
-        private string CuerpoFactura(Factura facmae, FacturaDetalle facdet, string tipo) 
+        private string CuerpoFactura(Factura facmae, FacturaDetalle facdet) 
         {
             Conversion c = new Conversion();
             string text = c.enletras(facmae.total + "");
@@ -360,35 +359,36 @@ namespace POSMovil.View
             text += " Bolivianos";
             string cadena = "^XA^POI^MNN^CI28^PW560^CF1,30,12";
             int filas;
+            cadena += "^FO20,80^FB540,3,,C,0^A0N,30,25^FDFACTURA^FS";
+            cadena += "^FO20,80^FB540,3,,C,0^A0N,30,25^FDCON DERECHO A CRÉDITO FISCAL^FS";
             filas = (_parametros.nombre1.Length > 45) ? (_parametros.nombre1.Length / 45) + 1 : 1;
             cadena += "^LL" + (((filas + 1) * 40) + 5);
             cadena += "^FO20,50^FB540,3,10,C,0^FD" + _parametros.nombre1 + ".\\&MATRIZ^FS^XZ";
+            cadena += "^FO20,80^FB540,3,,C,0^A0N,30,25^FDNo. Punto de Venta" + facmae.ptovta + "^FS";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
-            filas = (_parametros.direccion.Length > 45) ? (_parametros.direccion.Length / 45) + 1 : 1;
+            filas = (_siat.cufd_direc.Length > 45) ? (_siat.cufd_direc.Length / 45) + 1 : 1;
             cadena += "^LL" + ((filas * 40) + 5);
-            cadena += "^FO20,0^FB540,3,10,C,0^FD" + _parametros.direccion + "^FS^XZ";
+            cadena += "^FO20,0^FB540,3,10,C,0^FD" + _siat.cufd_direc + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL315";
-            cadena += "^FO20,0^FB540,3,10,C,0^FDTELF. " + _parametros.telefonos + "\\&" + _parametros.ciudad + " - Bolivia" + "^FS";
-            cadena += "^FO20,80^FB540,3,,C,0^A0N,30,25^FDFACTURA^FS";
-            cadena += "^FO20,120^FB540,3,,C,0^FD" + tipo +"^FS";
+            cadena += "^FO20,0^FB540,3,10,C,0^FDTel. " + _parametros.telefonos + "\\&" + _parametros.ciudad + " - Bolivia" + "^FS";
             cadena += "^FO20,160^GB540,3,3^FS";
-            cadena += "^FO20,180^FB540,3,,C,0^A0N,30,25^FDNIT: " + _parametros.nit + "^FS";
-            cadena += "^FO20,220^FB540,3,,C,0^A0N,30,25^FDFACTURA N°: " + facmae.nrofact + "^FS";
-            cadena += "^FO20,260^FB540,3,,C,0^FDAUTORIZACIÓN N°: " + facmae.cuf + "^FS";
+            cadena += "^FO20,180^FB540,3,,C,0^A0N,30,25^FDNIT\\&" + _parametros.nit + "^FS";
+            cadena += "^FO20,220^FB540,3,,C,0^A0N,30,25^FDFACTURA N°\\&" + facmae.nrofact + "^FS";
+            cadena += "^FO20,260^FB540,3,,C,0^FDAUTORIZACIÓN N°\\&" + facmae.cuf + "^FS";
             cadena += "^FO20,300^GB540,3,3^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
+            filas = (nombre.Length > 30) ? (nombre.Length / 30) + 1 : 1;
+            cadena += "^LL" + ((filas * 40) + 5);
+            cadena += "^FO20,0^FB540,3,,L,0^FDNOMBRE/RAZÓN SOCIAL:^FS";
+            cadena += "^FO180,0^FB360,3,10,J,0^FD" + facmae.nombre + "^FS^XZ";
+            cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL125";
+            cadena += "^FO20,0^FB540,3,,L,0^FDNIT/CI/CEX:^FS";
+            cadena += "^FO180,0^FB360,3,,J,0^FD" + facmae.nit + "^FS";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL65";
             cadena += "^FO20,0^GB540,3,3^FS";
             cadena += "^FO20,20^FB540,3,,J,0^FDFECHA: " + facmae.fh.ToString("dd") + "/" + facmae.fh.ToString("MM") + "/" + facmae.fh.ToString("yyyy") + " " + facmae.fh.ToString("hh:mm") + "^FS";
             cadena += "^FO420,20^FB540,3,,J,0^FDUsu.:" + facmae.usercode + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
-            filas = (nombre.Length > 30) ? (nombre.Length / 30) + 1 : 1;
-            cadena += "^LL" + ((filas * 40) + 5);
-            cadena += "^FO20,0^FB540,3,,L,0^FDSEÑOR(ES):^FS";
-            cadena += "^FO180,0^FB360,3,10,J,0^FD" + facmae.nombre + "^FS^XZ";
-            cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL125";
-            cadena += "^FO20,0^FB540,3,,L,0^FDNIT/CI:^FS";
-            cadena += "^FO180,0^FB360,3,,J,0^FD" + facmae.nit + "^FS";
             cadena += "^FO20,40^GB540,3,3^FS";
             cadena += "^FO20,60^FB390,3,,C,0^A0N,30,25^FDCONCEPTO^FS";
             cadena += "^FO430,60^FB540,3,,J,0^A0N,30,25^FDSUBTOT^FS";
@@ -417,5 +417,7 @@ namespace POSMovil.View
             cadena += "^XA^LL50^XZ";
             return cadena;
         }
+
+        
     }
 }

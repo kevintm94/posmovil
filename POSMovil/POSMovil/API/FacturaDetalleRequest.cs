@@ -43,7 +43,7 @@ namespace POSMovil.API
                 { "codigo",     factura.codigo },
                 { "descripcio", factura.descripcio },
                 { "pu",         factura.pu.ToString().Replace(',','.') },
-                { "cantidad",   factura.cantidad },
+                { "cantidad",   factura.cantidad.ToString().Replace(',','.') },
                 { "descuento",  factura.descuento.ToString().Replace(',','.') },
                 { "subtotal",   factura.subtotal.ToString().Replace(',','.') },
                 { "codprodsin", factura.codprodsin },

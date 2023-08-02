@@ -49,7 +49,7 @@ namespace POSMovil.API
             var response = await _restclient.ExecuteAsync<Factura>(Method.POST, $"{App.BaseUrl}/cabecera", new Dictionary<string, object> 
             {
                 { "idfact",     factura.idfact },
-                { "fh",         factura.fh },
+                { "fh",         factura.fh.ToString("yyyy-MM-dd HH:mm") },
                 { "nrofact",    factura.nrofact },
                 { "nit",        factura.nit },
                 { "complement", factura.complement },
@@ -89,7 +89,8 @@ namespace POSMovil.API
                 { "cod_es",     factura.cod_es },
                 { "desc_es",    factura.desc_es },
                 { "sucursal",   factura.sucursal },
-                { " ptovta",    factura.ptovta }
+                { "ptovta",     factura.ptovta },
+                { "usercode",   factura.usercode}
             });
 
             return response.Result != null;

@@ -29,7 +29,7 @@ namespace POSMovil.View
             lblNro.Text = fact.nrofact + "";
             lblNit.Text = fact.nit + "";
             lblNombre.Text = fact.nombre;
-            lblTotal.Text = fact.tot_a_pag + " Bs.";
+            lblTotal.Text = fact.total + " Bs.";
             BtnReImp.Clicked += BtnReImp_Clicked;
         }
 
@@ -48,7 +48,7 @@ namespace POSMovil.View
                 return;
             }
             Cargador.IsRunning = true;
-            var dosific = await new DosificacionRequest(App.RestClient).Get(_fact.nroauto);
+            var dosific = await new DosificacionRequest(App.RestClient).Get(_fact.idfact);
             Dosificacion dosific1 = dosific.ElementAt(0);
             if (cbOriginal.IsChecked)
             {
@@ -90,7 +90,7 @@ namespace POSMovil.View
         private string CuerpoFactura(string ley453, Factura facmae, FacturaDetalle facdet, string tipo)
         {
             Conversion c = new Conversion();
-            string text = c.enletras(facmae.tot_a_pag + "");
+            string text = c.enletras(facmae.total + "");
             string nombre = facmae.nombre;
             text = text[0] + text.Substring(1).ToLower();
             text += " Bolivianos";
@@ -110,27 +110,27 @@ namespace POSMovil.View
             cadena += "^FO20,160^GB540,3,3^FS";
             cadena += "^FO20,180^FB540,3,,C,0^A0N,30,25^FDNIT: " + _parametros.nit + "^FS";
             cadena += "^FO20,220^FB540,3,,C,0^A0N,30,25^FDFACTURA N°: " + facmae.nrofact + "^FS";
-            cadena += "^FO20,260^FB540,3,,C,0^FDAUTORIZACIÓN N°: " + facmae.nroauto + "^FS";
+            cadena += "^FO20,260^FB540,3,,C,0^FDAUTORIZACIÓN N°: " + facmae.cuf + "^FS";
             cadena += "^FO20,300^GB540,3,3^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
             switch (_actividad)
             {
                 case 1:
-                    filas = (_parametros.actividad1.Length > 45) ? (_parametros.actividad1.Length / 45) + 1 : 1;
+                    filas = (_parametros.nombre1.Length > 45) ? (_parametros.nombre1.Length / 45) + 1 : 1;
                     cadena += "^LL" + ((filas * 40) + 5);
-                    cadena += "^FO20,0^FB540,3,10,J,0^FD" + _parametros.actividad1 + "^FS^XZ";
+                    cadena += "^FO20,0^FB540,3,10,J,0^FD" + _parametros.nombre1 + "^FS^XZ";
                     break;
                 case 2:
-                    filas = (_parametros.actividad2.Length > 45) ? (_parametros.actividad2.Length / 45) + 1 : 1;
+                    filas = (_parametros.nombre2.Length > 45) ? (_parametros.nombre2.Length / 45) + 1 : 1;
                     cadena += "^LL" + ((filas * 40) + 5);
-                    cadena += "^FO20,0^FB540,3,10,J,0^FD" + _parametros.actividad2 + "^FS^XZ";
+                    cadena += "^FO20,0^FB540,3,10,J,0^FD" + _parametros.nombre2 + "^FS^XZ";
                     break;
             }
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL65";
             cadena += "^FO20,0^GB540,3,3^FS";
-            string[] split = facmae.fecha.Split("-".ToCharArray());
-            cadena += "^FO20,20^FB540,3,,J,0^FDFECHA: " + split[2] + "/" + split[1] + "/" + split[0] + " " + facmae.hora + "^FS";
-            cadena += "^FO420,20^FB540,3,,J,0^FDUsu.:" + facmae.userid + "^FS^XZ";
+            string[] split = facmae.fecha_emi.Split("-".ToCharArray());
+            cadena += "^FO20,20^FB540,3,,J,0^FDFECHA: " + split[2] + "/" + split[1] + "/" + split[0] + " " + facmae.fh.ToString("HH:mm") + "^FS";
+            cadena += "^FO420,20^FB540,3,,J,0^FDUsu.:" + facmae.usercode + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
             filas = (nombre.Length > 30) ? (nombre.Length / 30) + 1 : 1;
             cadena += "^LL" + ((filas * 40) + 5);
@@ -144,28 +144,28 @@ namespace POSMovil.View
             cadena += "^FO430,60^FB540,3,,J,0^A0N,30,25^FDSUBTOT^FS";
             cadena += "^FO20,100^GB540,3,3^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
-            filas = (facdet.Concepto.Length > 33) ? (facdet.Concepto.Length / 33) + 1 : 1;
+            filas = (facdet.descripcio.Length > 33) ? (facdet.descripcio.Length / 33) + 1 : 1;
             cadena += "^LL" + ((filas * 40) + 45);
-            cadena += "^FO20,0^FB340,4,10,J,0^FD" + facdet.Concepto + "^FS";
+            cadena += "^FO20,0^FB340,4,10,J,0^FD" + facdet.descripcio + "^FS";
             cadena += "^FO430,0^FB540,3,,J,0^FD" + facdet.subtotal.ToString("#.00") + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL60";
             cadena += "^FO20,0^GB540,3,3^FS";
             cadena += "^FO20,20^FB390,3,,C,0^A0N,30,25^FDIMPORTE TOTAL Bs.^FS";
-            cadena += "^FO430,20^FB540,3,,J,0^A0N,30,25^FD" + facmae.tot_a_pag.ToString("#.00") + "^FS^XZ";
+            cadena += "^FO430,20^FB540,3,,J,0^A0N,30,25^FD" + facmae.total.ToString("#.00") + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12";
             filas = (text.Length > 40) ? (text.Length / 40) + 1 : 1;
             cadena += "^LL" + ((filas * 40) + 5);
             cadena += "^FO20,0^FB540,3,,J,0^A0N,30,25^FDSON: " + text + "^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL370";
-            cadena += "^FO20,0^FB540,3,,J,0^FDCÓDIGO DE CONTROL: " + facmae.cod_ctrl + "^FS";
-            string[] fechaL = facmae.fechalim.Split("-".ToCharArray());
+            cadena += "^FO20,0^FB540,3,,J,0^FDCÓDIGO DE CONTROL: " + facmae.cufdcdctrl + "^FS";
+            string[] fechaL = facmae.fecha_emi.Split("-".ToCharArray());
             cadena += "^FO20,40^FB540,3,,J,0^FDFECHA LÍMITE DE EMISIÓN: " + fechaL[2] + "/" + fechaL[1] + "/" + fechaL[0] + "^FS";
-            cadena += "^FO160,80^BQN,2,7^FD.." + _parametros.nit + "|" + facmae.nrofact + "|" + facmae.nroauto + "|" + facmae.fecha + "|" + Math.Round(facmae.tot_a_pag, 2) + "|" + Math.Round(facmae.tot_a_pag, 2) + "|" + facmae.cod_ctrl + "|" + facmae.nit + "|0|0|0|0^FS^XZ";
+            cadena += "^FO160,80^BQN,2,7^FD.." + _parametros.nit + "|" + facmae.nrofact + "|" + facmae.cuf + "|" + facmae.fh + "|" + Math.Round(facmae.total, 2) + "|" + Math.Round(facmae.total, 2) + "|" + facmae.cufdcdctrl + "|" + facmae.nit + "|0|0|0|0^FS^XZ";
             cadena += "^XA^POI^MNN^CI28^CF1,30,12^LL350";
             cadena += "^FO20,0^FB540,3,10,J,0^FD\"ESTA FACTURA CONTRIBUYE AL DESARROLLO DEL PAIS.EL USO ILICITO DE ESTA SERA SANCIONADO DE ACUERDO A LA LEY\"^FS";
             cadena += "^FO20,120^FB540,3,10,J,0^FDLEY No. 453: " + ley453 + "^FS";
             cadena += "^FO20,240^GB540,3,3^FS";
-            cadena += "^FO20,260^FB540,3,10,J,0^FD" + _parametros.SaludoFin + "^FS^XZ";
+            cadena += "^FO20,260^FB540,3,10,J,0^FD¡Gracias por su compra!^FS^XZ";
             cadena += "^XA^LL50^XZ";
             return cadena;
         }

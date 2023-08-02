@@ -10,7 +10,7 @@ namespace POSMovil.API
 		public string codigo { get; set; }
 		public string descripcio { get; set; }
 		public decimal pu { get; set; }
-		public int cantidad { get; set; }
+		public decimal cantidad { get; set; }
 		public decimal descuento { get; set; }
 		public decimal subtotal { get; set; }
 		public int codprodsin { get; set; }

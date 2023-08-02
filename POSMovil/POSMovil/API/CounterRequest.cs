@@ -26,7 +26,7 @@ namespace POSMovil.API
 
         public async Task<bool> Update(Counter counter, int id)
         {
-            var response = await _restclient.ExecuteAsync<Counter>(Method.POST, $"{App.BaseUrl}/counter/{id}", new Dictionary<string, object>
+            var response = await _restclient.ExecuteAsync<Counter>(Method.PUT, $"{App.BaseUrl}/counter/{id}", new Dictionary<string, object>
             {
                 { "idfact", counter.idfact },
                 { "nrofact_0", counter.nrofact_0 },

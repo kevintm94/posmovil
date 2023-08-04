@@ -78,6 +78,10 @@
                     </Label>
                     <Entry x:Name="boxEmail" IsTextPredictionEnabled="False" MaxLength="50" Keyboard="Email" Text="{Binding cliente.email}" />
                 </StackLayout>
+                <StackLayout>
+                    <Label x:Name="lblCargando" HorizontalOptions="CenterAndExpand"/>
+                    <ActivityIndicator x:Name="Cargador" IsRunning="False" IsVisible="false" />
+                </StackLayout>
                 <Button x:Name="btnGuardar" Text="Guardar"/>
             </StackLayout>
         </ScrollView>

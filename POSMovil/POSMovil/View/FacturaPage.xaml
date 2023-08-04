@@ -7,7 +7,14 @@
         <ScrollView>
             <StackLayout Padding="30" Spacing="20">
                 <StackLayout>
-                    <Label  Text="Documento Identidad" Padding="2" />
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Documento Identidad" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
@@ -18,7 +25,14 @@
                     </Grid>
                 </StackLayout>
                 <StackLayout>
-                    <Label  Text="Nombre o Razón Social" Padding="2" />
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Nombre o Razón Social" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*" />
@@ -40,12 +54,67 @@
                     <Picker x:Name="cboxProductos" Title="Selecione una opción de la lista" ItemsSource="{Binding Productos}" ItemDisplayBinding="{Binding descripcio}" SelectedIndexChanged="cboxProductos_SelectedIndexChanged"/>
                 </StackLayout>
                 <StackLayout>
-                    <Label Text="Detalle o Concepto" Padding="2" />
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Detalle o Concepto" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
                     <Editor x:Name="BoxDetalle" IsTextPredictionEnabled="False" TextTransform="Uppercase" MaxLength="150" AutoSize="TextChanges" />
                 </StackLayout>
                 <StackLayout>
-                    <Label  Text="Total (Bs.)" Padding="2" />
-                    <Entry x:Name="BoxTotal" IsTextPredictionEnabled="False" TextTransform="Uppercase" Keyboard="Telephone" MaxLength="7"/>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Metodo Pago" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Picker x:Name="cboxPagos" Title="Selecione una opción de la lista" ItemsSource="{Binding MetodoPagos}" ItemDisplayBinding="{Binding descripcio}" SelectedIndexChanged="cboxPagos_SelectedIndexChanged"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Total (Bs.)" />
+                                <Span Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Entry x:Name="BoxTotal" IsTextPredictionEnabled="False" Keyboard="Telephone" MaxLength="7"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Monto Gift Card (Bs.)" />
+                                <Span x:Name="lblmontogift" Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Entry x:Name="BoxMontoGift" IsTextPredictionEnabled="False" Keyboard="Telephone" MaxLength="7" Text="0"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Padding="2">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Tarjeta " />
+                                <Span Text="(Primeros y últimos 4 dígitos)" FontSize="12"/>
+                                <Span x:Name="lbltarjeta" Text="*" TextColor="#EF3731" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Entry x:Name="boxPrimeros" Keyboard="Numeric" MaxLength="4" Placeholder="0000" />
+                        <Entry x:Name="boxUltimos" Keyboard="Numeric" MaxLength="4" Placeholder="0000" Grid.Column="1" />
+                    </Grid>
                 </StackLayout>
                 <StackLayout>
                     <StackLayout Orientation="Horizontal">

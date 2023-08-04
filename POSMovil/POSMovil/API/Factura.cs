@@ -7,7 +7,8 @@ namespace POSMovil.API
     public class Factura
     {
 		public int idfact { get; set; }
-		public DateTime fh { get; set; }
+        public DateTime fecha { get; set; }
+        public DateTime fh { get; set; }
 		public int nrofact { get; set; }
 		public string nit { get; set; }
 		public string complement { get; set; }
@@ -49,5 +50,6 @@ namespace POSMovil.API
 		public int sucursal { get; set; }
 		public int ptovta { get; set; }
 		public string usercode { get; set; }
-	}
+        public string direccion { get; set; }
+    }
 }

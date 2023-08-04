@@ -36,6 +36,7 @@ namespace POSMovil.View
 
         private async void BtnGuardar_Clicked(object sender, EventArgs e)
         {
+            btnGuardar.IsEnabled = false;
             if (boxNit.Text == "0")
             {
                 await DisplayAlert("PC-POS Móvil", "El campo documento identidad no puede ser 0", "Aceptar");
@@ -63,6 +64,9 @@ namespace POSMovil.View
             
             TipoDocumentoIdentidad selected = (TipoDocumentoIdentidad)Cdtipodoc.SelectedItem;
             cliente.cdtipodoc = selected.codigo;
+
+            Cargador.IsVisible = true;
+            Cargador.IsRunning = true;
             if (this.Title == "Crear Cliente")
             {
                 if (await new ClientRequest(App.RestClient).Add(cliente))
@@ -77,6 +81,16 @@ namespace POSMovil.View
                 else
                     await DisplayAlert("PC-POS Móvil", "No se pudo actualizar el cliente, vuelva a intentar", "Aceptar");
             }
+            boxNit.Text = "";
+            boxComplemento.Text = "";
+            boxNombre.Text = "";
+            boxDireccion.Text = "";
+            boxCelular.Text = "";
+            boxTelefono.Text = "";
+            boxEmail.Text = "";
+            Cargador.IsVisible = false;
+            Cargador.IsRunning = false;
+            btnGuardar.IsEnabled = true;
         }
     }
 }
